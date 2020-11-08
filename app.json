@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/addFrom/addFrom",
+    "pages/search/search",
+    "pages/start/start",
+    "pages/center/center",
+    "pages/payRecord/payRecord"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "black",
+    "list": [
+      {
+        "selectedIconPath": "images/desk-list_active.png",
+        "iconPath": "images/desk-list.png",
+        "pagePath": "pages/index/index",
+        "text": "桌台列表"
+      },
+      {
+        "selectedIconPath": "images/add_active.png",
+        "iconPath": "images/add.png",
+        "pagePath": "pages/addFrom/addFrom",
+        "text": "会员添加"
+      },
+      {
+        "selectedIconPath": "images/vip_active.png",
+        "iconPath": "images/vip.png",
+        "pagePath": "pages/search/search",
+        "text": "会员管理"
+      },
+      {
+        "selectedIconPath": "images/center_active.png",
+        "iconPath": "images/center.png",
+        "pagePath": "pages/center/center",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

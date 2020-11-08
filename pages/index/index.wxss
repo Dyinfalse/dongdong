@@ -1,0 +1,66 @@
+/**index.wxss**/
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  height: 100%
+}
+
+.examples {
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  padding: 14px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0px;
+  width: 90%;
+}
+
+.examples text::before {
+  content: " ";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  position: relative;
+  right: 3px;
+  top: 2px;
+}
+
+.desk-list .desk-info.ing,
+.examples text.ing::before {
+  background: #30BF8A;
+}
+
+.desk-list .desk-info.pause,
+.examples text.pause::before {
+  background: #F3BD4E;
+}
+
+.desk-list .desk-info.lt400,
+.examples text.lt400::before {
+  background: #FF6E35;
+}
+
+.desk-list .desk-info.free,
+.examples text.free::before {
+  background: #A5ADBA;
+}
+
+.desk-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 60px;
+}
+
+.desk-list .desk-info {
+  width: 48%;
+  height: 124px;
+  background: #A5ADBA;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
