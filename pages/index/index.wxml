@@ -1,25 +1,25 @@
 <!--index.wxml-->
 <view class="container">
-  <view class='examples'>
-    <text class='ing'>使用</text>
-    <text class='pause'>暂停</text>
-    <text class='lt400'>剩余不足400分钟</text>
-    <text class='free'>未使用</text>
-  </view>
-  <view class='desk-list'>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-    <view class='desk-info'></view>
-  </view>
+    <view class='examples'>
+        <text class='ing'>使用</text>
+        <text class='pause'>暂停</text>
+        <text class='lt400'>剩余不足400分钟</text>
+        <text class='free'>未使用</text>
+    </view>
+    <view class='desk-list'>
+        <view class="desk-info {{item == 1 ? 'ing' : item == 2 ? 'pause' : item == 3 ? 'lt400' : 'free'}}" wx:for="{{deskList}}" wx:key="item">
+            <view class="desk-num">01桌</view>
+            <view class="vip-name">
+                <text>会员名称</text>
+                <text class="vip-icon"></text>
+            </view>
+            <view>开始时间：12:03:06</view>
+            <view>消费时长：10分钟</view>
+            <view class="btn-box">
+                <button class="ing">开始</button>
+                <button class="pause">暂停</button>
+                <button class="end">结束</button>
+            </view>
+        </view>
+    </view>
 </view>
