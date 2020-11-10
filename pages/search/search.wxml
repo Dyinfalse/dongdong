@@ -3,13 +3,15 @@
 <view class="search-content">
   <view class="content">
     <text class="title">填写手机号/姓名</text>
-    <view class="search-weui-cells weui-cells_after-title">
-        <view class="search-weui-cell weui-cell_input">
-          <label>查询会员</label>
-          <input class="weui-input" placeholder="请输入手机号或名称"/>
-        </view>
-      </view>
+    <mp-form id="form">
+      <mp-cells>
+        <mp-cell title="查询会员" >
+            <input class="weui-input" placeholder="请输入手机号或名称"/>
+        </mp-cell>
+      </mp-cells>
+    </mp-form>
   </view>
-  <view class="btn">查询</view>
+  <!-- <view class="btn">查询</view> -->
+  <button class="weui-btn" type="primary">查询</button>
   <!-- 会员查询1 -->
 </view>

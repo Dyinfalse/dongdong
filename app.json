@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/start/start",
     "pages/index/index",
     "pages/addFrom/addFrom",
     "pages/search/search",
-    "pages/start/start",
+    
     "pages/center/center",
     "pages/payRecord/payRecord"
   ],
@@ -12,6 +13,10 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
+  },
+  "useExtendedLib": {
+    "kbone": true,
+    "weui": true
   },
   "tabBar": {
     "color": "#a9b7b7",
