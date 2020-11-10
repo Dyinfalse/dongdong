@@ -25,6 +25,9 @@ Page({
         })
     },
     onLoad: function () {
-        this.getDeskList();
+        
     },
+    onShow() {
+        this.getDeskList();
+    }
 })

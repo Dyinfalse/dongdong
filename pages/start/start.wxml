@@ -5,22 +5,17 @@
     <view class="num-title">
       <text>桌10</text>
     </view>
-    <view class="start-tab-content">
+    <!-- <view class="start-tab-content">
       <view class="start-tab">会员</view>
       <view class="start-tab">非会员</view>
-    </view>
+    </view> -->
     <view>
       <view class="weui-input-content">
-        <input class="weui-input" placeholder="  请输入手机号或姓名"/>
+        <input class="weui-input" placeholder="请输入手机号或姓名"/>
         <view class="btn">查询</view>
       </view>
     </view>
-    <view>
-      <view class="weui-input-content">
-        <input class="weui-input" placeholder="  请输入玩具编码"/>
-        <view class="btn">查询</view>
-      </view>
-    </view>
+    
     <button style="" class="weui-btn" type="primary">开始游戏</button>
   </view>
 </view>

@@ -18,6 +18,11 @@ const formatNumber = n => {
  *  公共请求方法
  */
 function http (config) {
+  wx.showLoading({title: '加载中…'})
+  if(/** 检查登录状态如果没登录 */false){
+    // redirect to login
+  }
+
   wx.request({
     url: 'https://www.dongdong.design' + config.url,
     data: config.data,
@@ -27,9 +32,11 @@ function http (config) {
       } else {
         console.err("请求异常", res);
       }
+      wx.hideLoading();
     },
     error (err) {
       console.err(err);
+      wx.hideLoading();
     }
   })
 }

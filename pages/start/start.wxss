@@ -9,7 +9,7 @@
 }
 .card-content{
   width: 90%;
-  height: 65%;
+  height: 45%;
   background-color: #fff;
   border-radius: 8rpx;
   padding: 200rpx 80rpx 100rpx 80rpx;
@@ -60,32 +60,29 @@
   margin-right: 10rpx;
 }
 .weui-input-content{
-  position: relative;
+  display: flex;
 }
 .weui-input-content .btn{
-  position: absolute;
-  /* top: 0; */
+  flex: 1;
+  height: 50px;
 }
 .weui-input{
-  /* width: 100% !important; */
   border: 2rpx solid rgba(182, 182, 182, 1);
-  border-radius: 8rpx;
+  border-radius: 8rpx 0rpx 0rpx 8rpx;
   font-size: 32rpx;
-  padding: 20rpx 0;
-  /* margin-right: 40rpx; */
-  /* padding-left: 20rpx; */
+  padding: 0 20rpx;
+  flex: 4;
+  height: 48px;
 }
 
 .btn{
-  background: #196BFF !important; 
+  background: #196BFF;
   padding: 20rpx 30rpx;
   color: #fff;
-  z-index: 99;
-  right: -4rpx;
-  top: -3rpx;
+  border-radius: 0rpx 8rpx 8rpx 0rpx;
 }
 
-.weui-btn{
+.weui-btn {
   width: 100%;
-  background: #196BFF !important;
+  background-color: #196BFF !important;
 }
