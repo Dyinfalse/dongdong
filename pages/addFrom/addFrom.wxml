@@ -1,2 +1,63 @@
 <!--pages/addFrom/addFrom.wxml-->
-<text>pages/addFrom/addFrom.wxml</text>
+<!-- <text>pages/addFrom/addFrom.wxml</text> -->
+<view class="addFrom-content">
+<!-- <mp-form-page> -->
+    <mp-form id="form">
+      <mp-cells>
+        <mp-cell title="手机号" >
+            <input class="weui-input" placeholder="请输入手机号"/>
+        </mp-cell>
+        <mp-cell title="姓名" >
+            <input class="weui-input" placeholder="请输入姓名"/>
+        </mp-cell>
+        <view class="weui-cell weui-cell_select">
+          <view class="section__title">性别</view>
+            <view class="weui-cell__bd">
+                <picker bindchange="bindAccountChange" value="age" range="{{ageData}}">
+                    <view class="weui-select">{{ageData[age]}}</view>
+                </picker>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_select">
+          <view class="section__title">生日</view>
+            <view class="weui-cell__bd">
+              <picker mode="date" value="{{date}}"  bindchange="bindDateChange">
+                <view class="weui-select">
+                  {{date}}
+                </view>
+              </picker>
+            </view>
+        </view>
+        <mp-cell title="联系电话" >
+            <input class="weui-input" placeholder="请输入手机号"/>
+        </mp-cell>
+        <view class="weui-cell weui-cell_select">
+          <view class="section__title">套餐</view>
+            <view class="weui-cell__bd">
+                <picker bindchange="bindAccountChange" value="meal" range="{{mealData}}">
+                    <view style="text-align: right;" class="weui-select">{{mealData[meal]}}</view>
+                </picker>
+            </view>
+        </view>
+        <mp-cell title="套餐时长" >
+            <input class="weui-input" placeholder="0分钟"/>
+        </mp-cell>
+        <mp-cell title="赠送时长" >
+            <input class="weui-input" placeholder="0分钟"/>
+        </mp-cell>
+        <mp-cell title="开卡日期" >
+            <input class="weui-input" placeholder="暂无"/>
+        </mp-cell>
+        <mp-cell title="过期日期" >
+            <input class="weui-input" placeholder="暂无"/>
+        </mp-cell>
+        <mp-cell title="当前积分" >
+            <input class="weui-input" placeholder="0"/>
+        </mp-cell>
+      </mp-cells>
+    </mp-form>
+    <!-- <view slot="button"> -->
+        <button style="" class="weui-btn" type="primary">添加会员</button>
+    <!-- </view> -->
+<!-- </mp-form-page> -->
+</view>
