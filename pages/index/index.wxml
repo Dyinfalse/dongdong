@@ -16,7 +16,7 @@
             <view>开始时间：12:03:06</view>
             <view>消费时长：10分钟</view>
             <view class="btn-box">
-                <button class="ing">开始</button>
+                <button class="ing" bindtap="toStart" data-deskinfo="{{item}}">开始</button>
                 <button class="pause">暂停</button>
                 <button class="end">结束</button>
             </view>

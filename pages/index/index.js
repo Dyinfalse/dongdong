@@ -14,6 +14,16 @@ Page({
             }
         })
     },
+    /**
+     * 开始游戏
+     */
+    toStart(e) {
+        let { deskinfo } = e.target.dataset;
+        console.log(deskinfo)
+        wx.navigateTo({
+            url: '../start/start'
+        })
+    },
     onLoad: function () {
         this.getDeskList();
     },
