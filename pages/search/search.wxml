@@ -1,5 +1,13 @@
 <!--pages/search/search.wxml-->
-<text>pages/search/search.wxml</text>
-<view>
-  会员查询1
+<!-- <text>pages/search/search.wxml</text> -->
+<view class="search-content">
+  <text class="title">填写手机号/姓名</text>
+  <view class="search-weui-cells weui-cells_after-title">
+    <view class="search-weui-cell weui-cell_input">
+      <label>查询会员</label>
+      <input class="weui-input" placeholder="请输入手机号或名称"/>
+    </view>
+  </view>
+  <view class="btn">查询</view>
+  <!-- 会员查询1 -->
 </view>
