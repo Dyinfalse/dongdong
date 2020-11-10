@@ -14,6 +14,27 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+/**
+ *  公共请求方法
+ */
+function http (config) {
+  wx.request({
+    url: 'https://www.dongdong.design' + config.url,
+    data: config.data,
+    success (res) {
+      if(res.statusCode === 200 && res.data.code === '200'){
+        config.success && config.success(res.data.data);
+      } else {
+        console.err("请求异常", res);
+      }
+    },
+    error (err) {
+      console.err(err);
+    }
+  })
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  http
 }

@@ -1,11 +1,20 @@
 //index.js
+import { http } from '../../utils/util';
 Page({
     data: {
-        deskList: [1,2,3,1,2,3,4,5]
+        deskList: []
     },
-    //事件处理函数
-    bindViewTap: function () {
-
+    getDeskList() {
+        let _this = this;
+        http({
+            url: '/desk/list',
+            data: {},
+            success(res) {
+                _this.setData({deskList: res});
+            }
+        })
     },
-    onLoad: function () {},
+    onLoad: function () {
+        this.getDeskList();
+    },
 })
