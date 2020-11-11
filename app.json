@@ -1,12 +1,11 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/center/center",
     "pages/login/login",
+    "pages/index/index",
     "pages/start/start",
     "pages/addFrom/addFrom",
     "pages/search/search",
-    
-    "pages/center/center",
     "pages/payRecord/payRecord"
   ],
   "window": {

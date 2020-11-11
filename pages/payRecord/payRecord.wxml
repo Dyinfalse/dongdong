@@ -1,5 +1,8 @@
 <!--pages/payRecord/payRecord.wxml-->
-<text>pages/payRecord/payRecord.wxml</text>
 <view>
-  消费记录
+    <mp-cells>
+        <mp-cell hover="true">
+            查看消费记录
+        </mp-cell>
+    </mp-cells>
 </view>

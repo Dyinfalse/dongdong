@@ -86,6 +86,10 @@ Page({
             method: 'POST',
             data: { password, phone },
             success(res) {
+                wx.setStorage({
+                    key: "userInfo",
+                    data: res
+                })
                 wx.switchTab({
                     url: '../index/index'
                 });
