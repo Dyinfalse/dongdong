@@ -1,0 +1,13 @@
+<!--pages/center/center.wxml-->
+<view>
+    <view>
+        <mp-cells>
+            <mp-cell hover="true" bindtap="toPayRecord">
+                查看消费记录
+            </mp-cell>
+        </mp-cells>
+    </view>
+    <view class="logout">
+        <button bindtap="logout">退出</button>
+    </view>
+</view>
