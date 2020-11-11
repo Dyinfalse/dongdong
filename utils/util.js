@@ -35,7 +35,7 @@ function http (config) {
       wx.hideLoading();
     },
     error (err) {
-      console.err(err);
+      console.log(err);
       wx.hideLoading();
     }
   })

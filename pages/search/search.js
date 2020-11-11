@@ -1,20 +1,59 @@
 // pages/search/search.js
+import { http } from '../../utils/util';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    error:null,
+    formData:{mobile:123},
+    rules: [{
+        name: 'mobile',
+        rules: [{required: true, message: '手机号或名称'}, {maxlength: 11, message: '请检查手机号或名称'}],
+    }]
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // this.getDeskList()
   },
 
+  formInputChange(e) {
+    const {field} = e.currentTarget.dataset
+    this.setData({
+        'formData.mobile': e.detail.value
+    })
+    // console.log(this.data)
+  },
+  getSearchList() {
+    let _this = this;
+    http({
+      url: '/app-user/keyword',
+      data: {keyword:_this.data.formData.mobile},
+        success(res) {
+            _this.setData({deskList: res});
+        }
+    })
+  },
+  search(){
+    this.selectComponent('#form').validate((valid, errors) => {
+      console.log('valid', valid, errors)
+      if (!valid) {
+          const firstError = Object.keys(errors)
+          if (firstError.length) {
+              this.setData({
+                  error: errors[firstError[0]].message
+              })
+
+          }
+      } else {
+        this.getSearchList()
+      }
+    })
+  },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -1,17 +1,18 @@
 <!--pages/search/search.wxml-->
 <!-- <text>pages/search/search.wxml</text> -->
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
 <view class="search-content">
   <view class="content">
     <text class="title">填写手机号/姓名</text>
-    <mp-form id="form">
+    <mp-form id="form" rules="{{rules}}" models="{{formData}}">
       <mp-cells>
-        <mp-cell title="查询会员" >
-            <input class="weui-input" placeholder="请输入手机号或名称"/>
+        <mp-cell title="查询会员" prop="mobile">
+            <input data-field="mobile" bindinput="formInputChange" class="weui-input" placeholder="请输入手机号或名称"/>
         </mp-cell>
       </mp-cells>
     </mp-form>
   </view>
   <!-- <view class="btn">查询</view> -->
-  <button class="weui-btn" type="primary">查询</button>
+  <button class="weui-btn" bindtap="search" type="primary">查询</button>
   <!-- 会员查询1 -->
 </view>

@@ -1,4 +1,4 @@
-/* pages/search/search.wxss */
+
 .search-content{
   height: 100%;
   display: flex;
@@ -7,14 +7,14 @@
   align-items: center;
   padding: 160rpx 30rpx 100rpx;
 }
-.search-content .content{
+.content{
   width: 100%;
   display: flex;
   align-items: center;
   /* justify-items: center; */
   flex-direction: column
 }
-.search-content .title{
+.title{
   font-size: 44rpx;
   color:#000;
   margin-bottom: 80rpx;
@@ -31,40 +31,3 @@
   background: #BFC2C8 !important;
   margin:88rpx auto;
 }
-/* .search-content .btn{
-  width: 40%;
-  font-size:32rpx;
-  color: #fff;
-  background-color: #196BFF;
-  text-align: center;
-  padding: 20rpx 0;
-  border-radius: 4rpx;
-} */
-/* .weui-btn{ */
-  /* font-size: 12px; */
-  /* background: #196BFF;
-  color: red; */
-/* } */
-/* .search-weui-cells{
-  width: 100%;
-  border-top: 1px solid #f5f5f5;
-  border-bottom: 1px solid #f5f5f5;
-
-
-}
-.search-weui-cell{
-  
-  display: flex;
-  align-items: center;
-  padding: 15rpx 0;
-
-}
-.search-weui-cell label{
-  font-size: 32rpx;
-  margin-right: 20rpx;
-}
-.search-weui-cell input{
-  font-size: 32rpx;
-
-
-} */
