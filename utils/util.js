@@ -25,14 +25,15 @@ function http (config) {
 
   wx.request({
     url: 'https://www.dongdong.design' + config.url,
+    method: config.method || 'GET',
     data: config.data,
     success (res) {
+      wx.hideLoading();
       if(res.statusCode === 200 && res.data.code === '200'){
         config.success && config.success(res.data.data);
       } else {
-        console.err("请求异常", res);
+        wx.showToast({title: res.data.message, icon: 'none'});
       }
-      wx.hideLoading();
     },
     error (err) {
       console.log(err);

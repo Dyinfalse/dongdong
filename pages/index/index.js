@@ -4,6 +4,9 @@ Page({
     data: {
         deskList: []
     },
+    onRefresh() {
+        this.getDeskList();
+    },
     getDeskList() {
         let _this = this;
         http({
@@ -22,7 +25,7 @@ Page({
         console.log(deskinfo)
         wx.navigateTo({
             url: '../start/start'
-        })
+        });
     },
     onLoad: function () {
         
