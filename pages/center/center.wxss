@@ -1,1 +1,5 @@
 /* pages/center/center.wxss */
+
+.logout {
+    margin-top: 30px;
+}

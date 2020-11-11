@@ -5,14 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    userInfo: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let _this = this;
+    wx.getStorage({key: 'userInfo', success(userInfo) {
+      _this.setData({userInfo: userInfo.data});
+    }})
   },
 
   /**
@@ -62,5 +65,25 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+
+  toPayRecord() {
+    wx.navigateTo({
+      url: '../payRecord/payRecord',
+    })
+  },
+
+  /**
+   * 退出
+   */
+  logout() {
+    wx.clearStorage({
+      success: (res) => {
+        wx.redirectTo({
+          url: '../login/login'
+        })
+      },
+    })
   }
 })
