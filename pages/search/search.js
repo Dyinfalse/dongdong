@@ -10,7 +10,7 @@ Page({
     formData:{mobile:123},
     rules: [{
         name: 'mobile',
-        rules: [{required: true, message: '手机号或名称'}, {maxlength: 11, message: '请检查手机号或名称'}],
+        rules: [{required: true, message: '请输入手机号或名称'}, {maxlength: 11, message: '请检查手机号或名称'}],
     }]
   },
   /**
@@ -25,7 +25,7 @@ Page({
     this.setData({
         'formData.mobile': e.detail.value
     })
-    // console.log(this.data)
+    console.log(this.data)
   },
   getSearchList() {
     let _this = this;
@@ -33,6 +33,10 @@ Page({
       url: '/app-user/keyword',
       data: {keyword:_this.data.formData.mobile},
         success(res) {
+          wx.showToast({
+            title: '暂无数据',
+            icon: 'none',
+          })
             _this.setData({deskList: res});
         }
     })

@@ -80,6 +80,7 @@
   padding: 20rpx 30rpx;
   color: #fff;
   border-radius: 0rpx 8rpx 8rpx 0rpx;
+  text-align: center;
 }
 
 .weui-btn {

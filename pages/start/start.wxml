@@ -1,5 +1,6 @@
 <!--pages/start/start.wxml-->
 <!-- <text>pages/start/start.wxml</text> -->
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
 <view class="start-content">
   <view class="card-content">
     <view class="num-title">
@@ -11,11 +12,11 @@
     </view> -->
     <view>
       <view class="weui-input-content">
-        <input class="weui-input" placeholder="请输入手机号或姓名"/>
-        <view class="btn">查询</view>
+        <input class="weui-input" data-mobile="{{formData.mobile}}"  bindinput="formInputChange" placeholder="请输入手机号或姓名"/>
+        <view class="btn" bindtap="search">查询</view>
       </view>
     </view>
     
-    <button style="" class="weui-btn" type="primary">开始游戏</button>
+    <button style="" bindtap="star" class="weui-btn" type="primary">开始游戏</button>
   </view>
 </view>
