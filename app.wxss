@@ -1,8 +1,0 @@
-/**app.wxss**/
-page {
-  height: 100%;
-}
-
-view, text, block {
-  box-sizing: border-box;
-}
