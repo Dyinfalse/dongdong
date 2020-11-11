@@ -2,5 +2,6 @@
   "usingComponents": {},
   "navigationBarTitleText": "咚咚积木",
   "navigationBarBackgroundColor": "#196BFF",
-  "navigationBarTextStyle": "white"
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true
 }

@@ -4,7 +4,7 @@ Page({
     data: {
         deskList: []
     },
-    onRefresh() {
+    onPullDownRefresh() {
         this.getDeskList();
     },
     getDeskList() {
@@ -13,6 +13,7 @@ Page({
             url: '/desk/list',
             data: {},
             success(res) {
+                wx.stopPullDownRefresh();
                 _this.setData({deskList: res});
             }
         })
@@ -24,7 +25,7 @@ Page({
         let { deskinfo } = e.target.dataset;
         console.log(deskinfo)
         wx.navigateTo({
-            url: '../start/start'
+            url: '../start/start?deskId=' + deskinfo.id
         });
     },
     onLoad: function () {
