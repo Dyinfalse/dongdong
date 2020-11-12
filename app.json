@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/index/index",
     "pages/vipDetails/vipDetails",
     "pages/payRecord/payRecord",
@@ -8,7 +9,8 @@
     "pages/login/login",
     "pages/start/start",
     "pages/search/search",
-    "pages/vipList/vipList"
+    "pages/vipList/vipList",
+    "pages/vipDetails/vipDetails"
   ],
   "window": {
     "backgroundTextStyle": "light",
