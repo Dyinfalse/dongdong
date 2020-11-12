@@ -55,15 +55,10 @@ Page({
       "preComboId": 0,
       "sex": 0,
       "type": 0,
-<<<<<<< HEAD
-      "date":"1996-10-10",
-      "validityVolume": "2020-11-11T14:44:15.413Z"
-=======
       "birthday":"1996-10-10",
       "presentTime": "",
       "preComboId": "",
       "validityVolume": ""
->>>>>>> 4d2b12f03313c4a941db5c95bba473413ef6ea4e
     }
   },
 
@@ -109,12 +104,9 @@ Page({
           }
       } else {
         let _this = this;
-<<<<<<< HEAD
-=======
         let { user, comboPicker, comboList } = _this.data;
         
         console.log(_this.data.user)
->>>>>>> 4d2b12f03313c4a941db5c95bba473413ef6ea4e
         http({
           url: '/app-user/registry',
           method:'POST',
@@ -127,8 +119,6 @@ Page({
       }
     })
   },
-<<<<<<< HEAD
-=======
 
   /**
    * 获取套餐list
@@ -164,7 +154,6 @@ Page({
       }
     })
   },
->>>>>>> 4d2b12f03313c4a941db5c95bba473413ef6ea4e
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
