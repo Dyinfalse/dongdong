@@ -1,7 +1,9 @@
 <!--pages/payRecord/payRecord.wxml-->
 <view>
     <mp-cells>
-        <mp-cell hover="true">
+        <mp-cell hover="true" wx:for="{{recordList}}" wx:key="id">
+            {{item.name}}-{{item.phone}}购买了:
+            <view wx:for="{{item.comboList}}" wx:key="id">{{item.name}}</view>
         </mp-cell>
     </mp-cells>
 </view>

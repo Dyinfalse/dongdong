@@ -6,10 +6,10 @@
     <mp-form id="form" rules="{{rules}}" models="{{user}}">
       <mp-cells>
         <mp-cell prop="phone" title="手机号" >
-            <input class="weui-input" maxlength="11" bindinput="formInputChange" data-field="phone" placeholder="请输入手机号"/>
+            <input class="weui-input" value="{{user.phone}}" maxlength="11" bindinput="formInputChange" data-field="phone" placeholder="请输入手机号"/>
         </mp-cell>
         <mp-cell prop="name" title="姓名" >
-            <input class="weui-input" bindinput="formInputChange" data-field="name" placeholder="请输入姓名"/>
+            <input class="weui-input" value="{{user.name}}" bindinput="formInputChange" data-field="name" placeholder="请输入姓名"/>
         </mp-cell>
         <view class="weui-cell weui-cell_select">
           <view class="section__title">性别</view>
@@ -22,7 +22,7 @@
         <view class="weui-cell weui-cell_select">
           <view class="section__title">生日</view>
             <view class="weui-cell__bd">
-              <picker mode="user.birthday" value="{{user.birthday}}"  bindchange="bindDateChange">
+              <picker mode="date" value="{{user.birthday}}"  bindchange="bindDateChange">
                 <view class="weui-select">
                   {{user.birthday}}
                 </view>
@@ -49,7 +49,7 @@
       </mp-cells>
     </mp-form>
     <!-- <view slot="button"> -->
-        <button style="" class="weui-btn" bindtap="add" type="primary">保存</button>
+        <button style="" class="weui-btn" bindtap="save" type="primary">保存</button>
     <!-- </view> -->
 <!-- </mp-form-page> -->
 </view>

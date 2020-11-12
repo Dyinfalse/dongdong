@@ -14,6 +14,10 @@ Page({
   onLoad: function (options) {
 
   },
+  onPullDownRefresh() {
+    console.log(1)
+    this.getVipList();
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -35,13 +39,10 @@ Page({
         url: '/app-user/members',
         data: {type: 1},
         success(res) {
-            wx.stopPullDownRefresh();
             _this.setData({vipList: res});
+            wx.stopPullDownRefresh();
         }
     })
-  },
-  onPullDownRefresh() {
-    this.getVipList();
   },
   /**
    * 生命周期函数--监听页面隐藏

@@ -39,6 +39,7 @@ Page({
         this.setData({
             'formData.mobile': e.detail.value
         })
+        this.getSearchList();
     },
     getSearchList() {
         let _this = this;

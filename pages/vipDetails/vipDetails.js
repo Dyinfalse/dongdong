@@ -47,7 +47,7 @@ Page({
             "type": 0,
             "birthday": "1996-10-10",
             "presentTime": "",
-            "preComboId": "",
+            "preComboId": "0",
             "validityVolume": ""
         }
     },
@@ -56,12 +56,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-      console.log(options)
-      let {user} = this.data
-      user = JSON.parse(options.user)
+      let user = JSON.parse(options.user)
+      user.preComboId = user.comboId;
       this.setData({user})
-      
-      
     },
     bindSexChange: function (e) {
         console.log('picker account 发生选择改变，携带值为', e.detail.value);
@@ -79,6 +76,7 @@ Page({
         })
     },
     bindDateChange(e) {
+        console.log(e)
         this.setData({
             [`user.birthday`]: e.detail.value
         })
@@ -93,7 +91,7 @@ Page({
         user.presentTime = e.detail.value;
         this.setData({ user })
     },
-    add() {
+    save() {
         this.selectComponent('#form').validate((valid, errors) => {
             console.log('valid', valid, errors)
             if (!valid) {
@@ -102,7 +100,6 @@ Page({
                     this.setData({
                         error: errors[firstError[0]].message
                     })
-
                 }
             } else {
                 let _this = this;
@@ -111,7 +108,7 @@ Page({
                     comboPicker,
                     comboList
                 } = _this.data;
-
+                console.log(user, comboPicker, comboList)
                 http({
                     url: '/app-user/update',
                     method: 'POST',
@@ -121,7 +118,7 @@ Page({
                     },
                     success(res) {
                         console.log(res)
-                        _this.resetUser();
+                        wx.navigateBack()
                     }
                 })
             }
@@ -138,8 +135,12 @@ Page({
             data: {},
             success(res) {
                 console.log(res)
+                let { user } = _this.data;
+                let comboPicker = res.findIndex(c => c.id == user.comboId)
+                console.log(comboPicker)
                 _this.setData({
-                    comboList: res
+                    comboList: res,
+                    comboPicker
                 });
             }
         });

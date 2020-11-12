@@ -1,13 +1,13 @@
 <!--index.wxml-->
 <view class="container">
     <view class='examples'>
-        <text class='ing'>使用</text>
-        <text class='pause'>暂停</text>
-        <text class='lt400'>剩余不足400分钟</text>
-        <text class='free'>未使用</text>
+        <text class="ing {{filterType == 'ing' ? 'active' : ''}}" data-type="ing" bindtap="filterList">使用</text>
+        <text class="pause {{filterType == 'pause' ? 'active' : ''}}" data-type="pause" bindtap="filterList">暂停</text>
+        <text class="lt400 {{filterType == 'lt400' ? 'active' : ''}}" data-type="lt400" bindtap="filterList">剩余不足400分钟</text>
+        <text class="free {{filterType == 'free' ? 'active' : ''}}" data-type="free" bindtap="filterList">未使用</text>
     </view>
     <view class='desk-list'>
-        <view class="desk-info {{item.status == 1 ? 'ing' : item.status == 0 ? 'pause' : (item.status == 1 && item.remainingTime < 400) ? 'lt400' : 'free'}}" wx:for="{{deskList}}" wx:key="deskId">
+        <view class="desk-info {{item.status == 1 ? 'ing' : item.status == 0 ? 'pause' : (item.status == 1 && item.remainingTime < 400) ? 'lt400' : 'free'}}" wx:for="{{showDeskList}}" wx:key="deskId">
             <view class="desk-num">{{item.name}}</view>
             <view class="vip-name">
                 <text class="userinfo">{{item.userInfo || '空闲'}}</text>

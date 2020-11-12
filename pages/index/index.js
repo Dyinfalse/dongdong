@@ -2,7 +2,9 @@
 import { http } from '../../utils/util';
 Page({
     data: {
-        deskList: []
+        deskList: [],
+        showDeskList: [],
+        filterType: ''
     },
     onPullDownRefresh() {
         this.getDeskList();
@@ -18,8 +20,32 @@ Page({
                     d.recordTimeSplit = d.recordTime ? d.recordTime.split(' ')[1] : '';
                     return d;
                 })});
+                _this.setData({showDeskList: _this.data.deskList, filterType: ''})
             }
         })
+    },
+    /**
+     * 筛选
+     */
+    filterList(e){
+        let { type } = e.target.dataset;
+        let { deskList, filterType, showDeskList } = this.data;
+        filterType = filterType == type ? '' : type;
+        console.log(filterType)
+        showDeskList = deskList.filter(d => {
+            if(!filterType) {
+                return  true;
+            } else if (filterType == 'ing') {
+                return d.status == 1;
+            } else if (filterType == 'pause') {
+                return d.status == 0;
+            } else if (filterType == 'lt400') {
+                return (d.status == 1 && d.remainingTime < 400);
+            } else {
+                return d.status == 2 || d.status == null;
+            }
+        })
+        this.setData({showDeskList, filterType})
     },
     /**
      * 开始游戏
@@ -36,14 +62,14 @@ Page({
     },
     updateDeskStatus(deskinfo, status) {
         let _this = this;
-        let { deskList } = this.data;
+        let { showDeskList } = this.data;
         http({
             url: '/desk/updateStatus',
             method: 'POST',
             data: {id: deskinfo.id, status },
             success(res) {
-                deskList.find(d => d.deskId == deskinfo.deskId).status = status;
-                _this.setData({ deskList });
+                showDeskList.find(d => d.deskId == deskinfo.deskId).status = status;
+                _this.setData({ showDeskList });
             }
         })
     },

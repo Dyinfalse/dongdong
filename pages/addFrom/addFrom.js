@@ -47,7 +47,7 @@ Page({
             "type": 0,
             "birthday": "1996-10-10",
             "presentTime": "",
-            "preComboId": "",
+            "preComboId": "0",
             "validityVolume": ""
         }
     },
@@ -104,7 +104,6 @@ Page({
                     comboPicker,
                     comboList
                 } = _this.data;
-
                 http({
                     url: '/app-user/registry',
                     method: 'POST',
@@ -114,7 +113,10 @@ Page({
                     },
                     success(res) {
                         console.log(res)
-                        _this.resetUser();
+                        wx.showToast({title: '添加成功', icon: 'none'});
+                        wx.switchTab({
+                          url: '/pages/index/index',
+                        })
                     }
                 })
             }
@@ -151,7 +153,7 @@ Page({
                 "type": 0,
                 "birthday": "1996-10-10",
                 "presentTime": "",
-                "preComboId": "",
+                "preComboId": "0",
                 "validityVolume": ""
             }
         })

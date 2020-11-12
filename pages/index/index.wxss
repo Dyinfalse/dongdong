@@ -19,6 +19,10 @@
     width: 90%;
     z-index: 99;
 }
+.examples text.active {
+    color: #FF6E35;
+    font-weight: bold;
+}
 
 .examples text::before {
     content: " ";
