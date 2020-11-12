@@ -14,7 +14,11 @@ Page({
             data: {},
             success(res) {
                 wx.stopPullDownRefresh();
-                _this.setData({deskList: res});
+                _this.setData({deskList: res.map(d => {
+                    d.recordTimeSplit = d.recordTime ? d.recordTime.split(' ')[1] : '';
+                    console.log(d)
+                    return d;
+                })});
             }
         })
     },
@@ -24,9 +28,40 @@ Page({
     toStart(e) {
         let { deskinfo } = e.target.dataset;
         console.log(deskinfo)
+        if(deskinfo.status == 0){
+
+            return this.updateDeskStatus(deskinfo, 1)
+        }
         wx.navigateTo({
             url: '../start/start?deskId=' + deskinfo.id
         });
+    },
+    updateDeskStatus(deskinfo, status) {
+        let _this = this;
+        let { deskList } = this.data;
+        http({
+            url: '/desk/updateStatus',
+            method: 'POST',
+            data: {id: deskinfo.id, status },
+            success(res) {
+                deskList.find(d => d.deskId == deskinfo.deskId).status = status;
+                _this.setData({ deskList });
+            }
+        })
+    },
+    /**
+     * 暂停
+     */
+    toPause(e){
+        let { deskinfo } = e.target.dataset;
+        this.updateDeskStatus(deskinfo, 0);
+    },
+    /**
+     * 结束
+     */
+    toEnd(e) {
+        let { deskinfo } = e.target.dataset;
+        this.updateDeskStatus(deskinfo, 2);
     },
     onLoad: function () {
         

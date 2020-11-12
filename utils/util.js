@@ -32,7 +32,7 @@ function http (config) {
       if(res.statusCode === 200 && res.data.code === '200'){
         config.success && config.success(res.data.data);
       } else {
-        wx.showToast({title: res.data.message, icon: 'none'});
+        wx.showToast({title: res.data.message || '网络错误', icon: 'none'});
       }
     },
     error (err) {

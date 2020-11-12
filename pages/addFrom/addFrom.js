@@ -113,10 +113,6 @@ Page({
             success(res) {
               console.log(res)
               _this.resetUser();
-              // wx.showToast({
-              //   title: '暂无数据',
-              //   icon: 'none',
-              // })
             }
         })
       }

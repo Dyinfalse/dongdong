@@ -8,17 +8,17 @@
     </view>
     <view class='desk-list'>
         <view class="desk-info {{item.status == 1 ? 'ing' : item.status == 0 ? 'pause' : (item.status == 1 && item.remainingTime < 400) ? 'lt400' : 'free'}}" wx:for="{{deskList}}" wx:key="deskId">
-            <view class="desk-num">01桌</view>
+            <view class="desk-num">{{item.name}}</view>
             <view class="vip-name">
                 <text class="userinfo">{{item.userInfo || '暂无用户名'}}</text>
                 <text class="vip-icon"></text>
             </view>
-            <view>开始时间：12:03:06</view>
+            <view>开始时间：{{item.recordTimeSplit}}</view>
             <view>消费时长：{{item.consumptionTime || '0'}}分钟</view>
             <view class="btn-box">
                 <button class="ing" bindtap="toStart" data-deskinfo="{{item}}">开始</button>
-                <button class="pause">暂停</button>
-                <button class="end">结束</button>
+                <button class="pause" bindtap="toPause" data-deskinfo="{{item}}">暂停</button>
+                <button class="end" bindtap="toEnd" data-deskinfo="{{item}}">结束</button>
             </view>
         </view>
     </view>
