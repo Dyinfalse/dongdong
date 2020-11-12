@@ -74,6 +74,12 @@ Page({
     })
   },
 
+  toVipList() {
+    wx.navigateTo({
+      url: '../vipList/vipList',
+    })
+  },
+
   /**
    * 退出
    */

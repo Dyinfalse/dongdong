@@ -104,7 +104,7 @@ Page({
         
         console.log(_this.data.user)
         http({
-          url: '/app-user/registry',
+          url: '/app-user/update',
           method:'POST',
           data: {
             ...user,
@@ -112,7 +112,6 @@ Page({
           },
             success(res) {
               console.log(res)
-              _this.resetUser();
               // wx.showToast({
               //   title: '暂无数据',
               //   icon: 'none',
@@ -136,26 +135,6 @@ Page({
           _this.setData({comboList: res});
         }
     });
-  },
-
-  resetUser() {
-    this.setData({
-      user: {
-        "phone":'',
-        "comboId": 0,
-        "coupon": 0,
-        "currentIntegral": 0,
-        "member": true,
-        "name": "",
-        "password": "",
-        "sex": 0,
-        "type": 0,
-        "birthday":"1996-10-10",
-        "presentTime": "",
-        "preComboId": "",
-        "validityVolume": ""
-      }
-    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

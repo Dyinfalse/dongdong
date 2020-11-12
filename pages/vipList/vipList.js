@@ -1,4 +1,3 @@
-// pages/payRecord/payRecord.js
 import { http } from '../../utils/util';
 Page({
 
@@ -6,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    recordList: []
+    vipList: []
   },
 
   /**
@@ -27,22 +26,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      this.getRecordList();
+      this.getVipList();
   },
 
-  getRecordList() {
+  getVipList() {
     let _this = this;
     http({
-        url: '/app-user/statistics',
-        data: {},
+        url: '/app-user/members',
+        data: {type: 1},
         success(res) {
             wx.stopPullDownRefresh();
-            _this.setData({recordList: res});
+            _this.setData({vipList: res});
         }
     })
   },
   onPullDownRefresh() {
-    this.getRecordList();
+    this.getVipList();
   },
   /**
    * 生命周期函数--监听页面隐藏

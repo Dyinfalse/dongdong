@@ -1,0 +1,8 @@
+<!--pages/vipList/vipList.wxml-->
+<view>
+    <mp-cells>
+        <mp-cell hover="true">
+            会员列表
+        </mp-cell>
+    </mp-cells>
+</view>
