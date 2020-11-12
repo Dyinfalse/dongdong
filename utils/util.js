@@ -22,16 +22,14 @@ function http (config) {
   if(/** 检查登录状态如果没登录 */false){
     // redirect to login
   }
-  //https://www.dongdong.design
   wx.request({
-    url: 'http://localhost:8080' + config.url,
+    url: 'https://www.dongdong.design' + config.url,
     method: config.method || 'GET',
     header: {
       // Cookie: "JSESSIONID=AA190A17C1840E5766B7DA341B6B98F8"
     },
     data: config.data,
     success (res) {
-      console.log(res)
       wx.hideLoading();
       if(res.statusCode === 200 && res.data.code === '200'){
         config.success && config.success(res.data.data);

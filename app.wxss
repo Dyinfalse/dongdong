@@ -1,6 +1,7 @@
 /**app.wxss**/
 page {
   height: 100%;
+  overflow: hidden;
 }
 
 view, text, block {

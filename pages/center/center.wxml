@@ -1,6 +1,10 @@
 <!--pages/center/center.wxml-->
-<view>
+<view class="flex-box">
     <view>
+        <view class="userInfo">
+            <view class="headimage"></view>
+            <view class="user-name">周小航</view>
+        </view>
         <mp-cells>
             <mp-cell hover="true" bindtap="toPayRecord">
                 查看消费记录
