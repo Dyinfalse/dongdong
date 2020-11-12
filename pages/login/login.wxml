@@ -1,10 +1,10 @@
 <view class="content">
     <view class="title">账号登录</view>
     <view>
-        <input type="text" value="{{phone}}" maxlength="11" bindinput="inputPhone" placeholder="请输入手机号" />
+        <input type="text" maxlength="11" bindinput="inputPhone" placeholder="请输入手机号" />
     </view>
     <view>
-        <input type="password" value="{{password}}" bindinput="inputPassword" placeholder="请输入密码" />
+        <input type="password" bindinput="inputPassword" placeholder="请输入密码" />
     </view>
     <view>
         <button bindtap="login">登录</button>

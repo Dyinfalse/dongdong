@@ -70,6 +70,7 @@ Page({
         this.setData({phone: e.detail.value});
     },
     inputPassword(e) {
+        console.log(e)
         this.setData({password: e.detail.value});
     },
 

@@ -18,30 +18,35 @@ const formatNumber = n => {
  *  公共请求方法
  */
 function http (config) {
-  wx.showLoading({title: '加载中…'})
-  if(/** 检查登录状态如果没登录 */false){
-    // redirect to login
-  }
-  wx.request({
-    url: 'https://www.dongdong.design' + config.url,
-    method: config.method || 'GET',
-    header: {
-      // Cookie: "JSESSIONID=AA190A17C1840E5766B7DA341B6B98F8"
-    },
-    data: config.data,
-    success (res) {
-      wx.hideLoading();
-      if(res.statusCode === 200 && res.data.code === '200'){
-        config.success && config.success(res.data.data);
-      } else {
-        wx.showToast({title: res.data.message || '网络错误', icon: 'none'});
+  let userInfo = wx.getStorageSync('userInfo');
+
+  if(config.url != '/login' && !userInfo) {
+    wx.redirectTo({
+      url: '/pages/login/login',
+    })
+  } else {
+    let { token } = userInfo;
+    token = token || '';
+    wx.showLoading({title: '加载中…'});
+    wx.request({
+      url: 'https://www.dongdong.design' + config.url,
+      method: config.method || 'GET',
+      header: { token },
+      data: config.data,
+      success (res) {
+        wx.hideLoading();
+        if(res.statusCode === 200 && res.data.code === '200'){
+          config.success && config.success(res.data.data);
+        } else {
+          wx.showToast({title: res.data.message || '网络错误', icon: 'none'});
+        }
+      },
+      error (err) {
+        console.log(err);
+        wx.hideLoading();
       }
-    },
-    error (err) {
-      console.log(err);
-      wx.hideLoading();
-    }
-  })
+    })
+  }
 }
 
 module.exports = {

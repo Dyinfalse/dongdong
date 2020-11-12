@@ -84,9 +84,7 @@ Page({
         })
     },
     presentTimeInput(e) {
-        let { user } = this.data;
-        user.presentTime = e.detail.value;
-        this.setData({ user })
+        this.data.user.presentTime = e.detail.value;
     },
     add() {
         this.selectComponent('#form').validate((valid, errors) => {
