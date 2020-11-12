@@ -1,3 +1,5 @@
+<!--pages/addFrom/addFrom.wxml-->
+<!-- <text>pages/addFrom/addFrom.wxml</text> -->
 <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
 <view class="addFrom-content">
 <!-- <mp-form-page> -->

@@ -24,7 +24,7 @@ function http (config) {
   }
   //https://www.dongdong.design
   wx.request({
-    url: 'http://localhost:8080' + config.url,
+    url: 'https://www.dongdong.design' + config.url,
     method: config.method || 'GET',
     header: {
       // Cookie: "JSESSIONID=AA190A17C1840E5766B7DA341B6B98F8"

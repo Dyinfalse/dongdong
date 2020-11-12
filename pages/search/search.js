@@ -33,11 +33,19 @@ Page({
       url: '/app-user/keyword',
       data: {keyword:_this.data.formData.mobile},
         success(res) {
-          wx.showToast({
-            title: '暂无数据',
-            icon: 'none',
-          })
-            _this.setData({deskList: res});
+          if (res.length == 0) {
+              wx.showToast({
+                  title: '暂无数据',
+                  icon: 'none',
+              })
+          } else {
+              _this.setData({
+                  dataList: res.map(u => {
+                      u.active = false;
+                      return u;
+                  })
+              });
+          }
         }
     })
   },
@@ -56,6 +64,17 @@ Page({
         this.getSearchList()
       }
     })
+  },
+  activeUser(e) {
+    // console.log(e.target.dataset)
+    wx.navigateTo({
+      url: `/pages/vipDetails/vipDetails?user=${JSON.stringify(e.target.dataset.user)}`,
+    })
+    // let { user } = e.target.dataset;
+    // let { dataList } = this.data;
+    // dataList.map(u => u.active = false);
+    // dataList.find(u => u.id == user.id).active = true;
+    // this.setData({ dataList, userId: user.id });
   },
   
   /**
