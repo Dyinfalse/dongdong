@@ -16,7 +16,6 @@ Page({
                 wx.stopPullDownRefresh();
                 _this.setData({deskList: res.map(d => {
                     d.recordTimeSplit = d.recordTime ? d.recordTime.split(' ')[1] : '';
-                    console.log(d)
                     return d;
                 })});
             }
@@ -27,13 +26,12 @@ Page({
      */
     toStart(e) {
         let { deskinfo } = e.target.dataset;
-        console.log(deskinfo)
         if(deskinfo.status == 0){
-
             return this.updateDeskStatus(deskinfo, 1)
         }
+        console.log(deskinfo)
         wx.navigateTo({
-            url: '../start/start?deskId=' + deskinfo.id
+            url: '../start/start?deskId=' + deskinfo.deskId + '&deskName=' + deskinfo.name
         });
     },
     updateDeskStatus(deskinfo, status) {

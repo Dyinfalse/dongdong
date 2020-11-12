@@ -4,7 +4,7 @@
 <view class="start-content">
   <view class="card-content">
     <view class="num-title">
-      <text>桌10</text>
+      <text>{{deskName}}</text>
     </view>
     <!-- <view class="start-tab-content">
       <view class="start-tab">会员</view>
@@ -12,11 +12,18 @@
     </view> -->
     <view>
       <view class="weui-input-content">
-        <input class="weui-input" data-mobile="{{formData.mobile}}"  bindinput="formInputChange" placeholder="请输入手机号或姓名"/>
+        <input class="weui-input" maxlength="11" data-mobile="{{formData.mobile}}"  bindinput="formInputChange" placeholder="请输入手机号或姓名"/>
         <view class="btn" bindtap="search">查询</view>
       </view>
     </view>
+    <view>
+      <mp-cells>
+          <mp-cell hover="true" ext-class="{{item.active ? 'active' : ''}}" bindtap="activeUser" data-user="{{item}}" wx:for="{{dataList}}" wx:key="id">
+              {{item.name}}
+          </mp-cell>
+      </mp-cells>
+    </view>
     
-    <button style="" bindtap="star" class="weui-btn" type="primary">开始游戏</button>
+    <button style="" wx:if="{{userId}}" bindtap="star" class="weui-btn" type="primary">开始游戏</button>
   </view>
 </view>

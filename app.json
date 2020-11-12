@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/vipDetails/vipDetails",
     "pages/index/index",
     "pages/payRecord/payRecord",
     "pages/addFrom/addFrom",
-    "pages/vipDetails/vipDetails",
     "pages/center/center",
     "pages/login/login",
     "pages/start/start",
