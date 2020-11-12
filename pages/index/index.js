@@ -25,7 +25,7 @@ Page({
         let { deskinfo } = e.target.dataset;
         console.log(deskinfo)
         wx.navigateTo({
-            url: '../start/start?deskId=' + deskinfo.id
+            url: '/pages/start/start?deskId=' + deskinfo.id
         });
     },
     onLoad: function () {

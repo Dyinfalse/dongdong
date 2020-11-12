@@ -6,8 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    deskId: null,
+    userId: null,
     id:0,
-    dto:1,
+    status:1,
     dataList:[],
     error:null,
     formData:{mobile:''},
@@ -19,10 +21,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (option) {
-    console.log(option.query)
+  onLoad: function (options) {
+    /**获取桌子id */
+    this.setData({
+      deskId:options.deskId
+    })
+    console.log(options)
   },
-
+  /**输入框 */
   formInputChange(e) {
     const {field} = e.currentTarget.dataset
     this.setData({
@@ -50,27 +56,33 @@ Page({
         }
     })
   },
+  /**开始游戏 */
   star(){
     let _this = this;
-    http({
-      url: '/desk/updateStatus',
-      method:'POST',
-      data: {id:_this.data.id,dto:_this.data.dto},
-        success(res) {
-          console.log(res)
-          // if(res.length == 0){
-          //   wx.showToast({
-          //     title: '暂无数据',
-          //     icon: 'none',
-          //   })
-          // }else{
-          //   _this.setData({dataList: res.data});
-          // } 
-          
-           
-        }
-    })
+    if(_this.data.deskId && _this.data.userId){
+      http({
+        url: '/desk/add',
+        method:'POST',
+        data: {deskId:_this.data.deskId,userId:_this.data.userId},
+          success(res) {
+            this.setData({
+              error: '开桌成功'
+            })
+            wx.navigateBack({
+              delta: 2
+            })
+            
+          }
+      })
+    }else{
+      this.setData({
+        error: '请添加会员'
+      })
+      
+    }
+    
   },
+  /**查询会员绑定id */
   search(){
     // if(this.data.formData.mobile.length >11){
     //   this.setData({
