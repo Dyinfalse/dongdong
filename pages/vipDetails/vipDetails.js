@@ -1,10 +1,12 @@
 // pages/addFrom/addFrom.js
+import { http } from '../../utils/util';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    comboPicker: 0,
     error:"",
     sexList:[
       { 
@@ -27,43 +29,27 @@ Page({
       }
     ],
     rules: [{
-        name: 'mobile',
+        name: 'phone',
         rules: [{required: true, message: '请输入手机号'}, {mobile:true, message: '手机号格式错误'}],
       },{
       name: 'name',
       rules: [{required: true, message: '请输入姓名'}],
-  },{
-    name: 'phone',
-    rules: [{required: true, message: '请输入手机号'}, {mobile:true, message: '手机号格式错误'}],
-  }],
-    // date:'2020-10-10',
-    // age:'0',
-    // ageData:["请选择","男","女"],
-    // mealData:["套餐A","套餐B"],
-    // meal:'0',
+    }],
 
     user:{
-      "mobile":'',
+      "phone":'',
       "comboId": 0,
       "coupon": 0,
       "currentIntegral": 0,
-      "id": 0,
       "member": true,
       "name": "",
       "password": "",
-      "phone": "",
-      "preComboId": 0,
       "sex": 0,
       "type": 0,
-<<<<<<< HEAD
-      "date":"1996-10-10",
-      "validityVolume": "2020-11-11T14:44:15.413Z"
-=======
       "birthday":"1996-10-10",
       "presentTime": "",
       "preComboId": "",
       "validityVolume": ""
->>>>>>> 4d2b12f03313c4a941db5c95bba473413ef6ea4e
     }
   },
 
@@ -71,7 +57,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
   bindSexChange: function(e) {
     console.log('picker account 发生选择改变，携带值为', e.detail.value);
@@ -88,13 +74,18 @@ Page({
   },
   bindDateChange(e){
     this.setData({
-        [`user.date`]: e.detail.value
+        [`user.birthday`]: e.detail.value
     })
   },
   bindcomboIdChange(e){
     this.setData({
-      [`user.comboId`]: e.detail.value
+      comboPicker: e.detail.value
     })
+  },
+  presentTimeInput(e) {
+    let { user } = this.data;
+    user.presentTime = e.detail.value;
+    this.setData({ user });
   },
   add(){
     this.selectComponent('#form').validate((valid, errors) => {
@@ -109,19 +100,18 @@ Page({
           }
       } else {
         let _this = this;
-<<<<<<< HEAD
-=======
         let { user, comboPicker, comboList } = _this.data;
         
         console.log(_this.data.user)
->>>>>>> 4d2b12f03313c4a941db5c95bba473413ef6ea4e
         http({
-          url: '/app-user/registry',
+          url: '/app-user/update',
           method:'POST',
-          data: _this.data.user,
+          data: {
+            ...user,
+            comboId: comboList[comboPicker].id
+          },
             success(res) {
               console.log(res)
-              _this.resetUser();
               // wx.showToast({
               //   title: '暂无数据',
               //   icon: 'none',
@@ -131,8 +121,6 @@ Page({
       }
     })
   },
-<<<<<<< HEAD
-=======
 
   /**
    * 获取套餐list
@@ -148,27 +136,6 @@ Page({
         }
     });
   },
-
-  resetUser() {
-    this.setData({
-      user: {
-        "phone":'',
-        "comboId": 0,
-        "coupon": 0,
-        "currentIntegral": 0,
-        "member": true,
-        "name": "",
-        "password": "",
-        "sex": 0,
-        "type": 0,
-        "birthday":"1996-10-10",
-        "presentTime": "",
-        "preComboId": "",
-        "validityVolume": ""
-      }
-    })
-  },
->>>>>>> 4d2b12f03313c4a941db5c95bba473413ef6ea4e
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -180,7 +147,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getCombo();
   },
 
   /**

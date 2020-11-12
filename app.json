@@ -1,12 +1,14 @@
 {
   "pages": [
-    "pages/addFrom/addFrom",
     "pages/index/index",
+    "pages/payRecord/payRecord",
+    "pages/addFrom/addFrom",
+    "pages/vipDetails/vipDetails",
     "pages/center/center",
     "pages/login/login",
     "pages/start/start",
     "pages/search/search",
-    "pages/payRecord/payRecord"
+    "pages/vipList/vipList"
   ],
   "window": {
     "backgroundTextStyle": "light",
