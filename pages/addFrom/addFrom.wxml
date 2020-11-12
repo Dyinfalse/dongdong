@@ -5,8 +5,8 @@
 <!-- <mp-form-page> -->
     <mp-form id="form" rules="{{rules}}" models="{{user}}">
       <mp-cells>
-        <mp-cell prop="mobile" title="手机号" >
-            <input class="weui-input" bindinput="formInputChange" data-field="mobile" placeholder="请输入手机号"/>
+        <mp-cell prop="phone" title="手机号" >
+            <input class="weui-input" maxlength="11" bindinput="formInputChange" data-field="phone" placeholder="请输入手机号"/>
         </mp-cell>
         <mp-cell prop="name" title="姓名" >
             <input class="weui-input" bindinput="formInputChange" data-field="name" placeholder="请输入姓名"/>
@@ -22,38 +22,29 @@
         <view class="weui-cell weui-cell_select">
           <view class="section__title">生日</view>
             <view class="weui-cell__bd">
-              <picker mode="user.date" value="{{user.date}}"  bindchange="bindDateChange">
+              <picker mode="user.birthday" value="{{user.birthday}}"  bindchange="bindDateChange">
                 <view class="weui-select">
-                  {{user.date}}
+                  {{user.birthday}}
                 </view>
               </picker>
             </view>
         </view>
-        <mp-cell prop='phone' title="联系电话" >
-            <input class="weui-input" bindinput="formInputChange" data-field="phone"  placeholder="请输入手机号"/>
-        </mp-cell>
         <view class="weui-cell weui-cell_select">
           <view class="section__title">套餐</view>
             <view class="weui-cell__bd">
-                <picker bindchange="bindcomboIdChange" value="{{user.comboId}}" range="{{comboList}}" range-key="name">
-                    <view style="text-align: right;" class="weui-select">{{comboList[user.comboId].name}}</view>
+                <picker bindchange="bindcomboIdChange" value="{{comboPicker}}" range="{{comboList}}" range-key="name">
+                    <view style="text-align: right;" class="weui-select">{{comboList[comboPicker].name}}</view>
                 </picker>
             </view>
         </view>
         <mp-cell title="套餐时长" >
-            <input class="weui-input" placeholder="0分钟"/>
+            <input class="weui-input" disabled value="{{comboList[comboPicker].duration}}"/>
         </mp-cell>
         <mp-cell title="赠送时长" >
-            <input class="weui-input" placeholder="0分钟"/>
-        </mp-cell>
-        <mp-cell title="开卡日期" >
-            <input class="weui-input" placeholder="暂无"/>
-        </mp-cell>
-        <mp-cell title="过期日期" >
-            <input class="weui-input" placeholder="暂无"/>
+            <input class="weui-input" value="{{user.presentTime}}" bindinput="presentTimeInput" placeholder="0分钟"/>
         </mp-cell>
         <mp-cell title="当前积分" >
-            <input class="weui-input" placeholder="0"/>
+            <input class="weui-input" disabled placeholder="0"/>
         </mp-cell>
       </mp-cells>
     </mp-form>
