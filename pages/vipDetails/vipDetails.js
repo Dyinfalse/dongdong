@@ -58,6 +58,7 @@ Page({
     onLoad: function (options) {
       let user = JSON.parse(options.user)
       user.preComboId = user.comboId;
+      user.presentTime = '';
       this.setData({user})
     },
     bindSexChange: function (e) {
@@ -109,6 +110,9 @@ Page({
                     comboList
                 } = _this.data;
                 console.log(user, comboPicker, comboList)
+                if(!comboPicker) {
+                    return wx.showToast({title: '清选择套餐', icon: 'none'});
+                }
                 http({
                     url: '/app-user/update',
                     method: 'POST',

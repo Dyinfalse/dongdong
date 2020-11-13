@@ -24,6 +24,11 @@ Page({
             }
         })
     },
+    toDetails(e){
+        wx.navigateTo({
+            url: `/pages/vipDetails/vipDetails?user=${JSON.stringify(e.target.dataset.user)}`,
+        })
+    },
     /**
      * 筛选
      */
@@ -36,7 +41,7 @@ Page({
             if(!filterType) {
                 return  true;
             } else if (filterType == 'ing') {
-                return d.status == 1;
+                return (d.status == 1 && d.remainingTime > 400);
             } else if (filterType == 'pause') {
                 return d.status == 0;
             } else if (filterType == 'lt400') {
