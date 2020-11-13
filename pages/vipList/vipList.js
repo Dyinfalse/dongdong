@@ -15,7 +15,6 @@ Page({
 
   },
   onPullDownRefresh() {
-    console.log(1)
     this.getVipList();
   },
 

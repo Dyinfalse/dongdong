@@ -6,10 +6,10 @@
     <mp-form id="form" rules="{{rules}}" models="{{user}}">
       <mp-cells>
         <mp-cell prop="phone" title="手机号">
-            <input class="weui-input" maxlength="11" bindinput="formInputChange" data-field="phone" placeholder="请输入手机号"/>
+            <input class="weui-input" value="{{user.phone}}" maxlength="11" bindinput="formInputChange" data-field="phone" placeholder="请输入手机号"/>
         </mp-cell>
         <mp-cell prop="name" title="姓名">
-            <input class="weui-input" bindinput="formInputChange" data-field="name" placeholder="请输入姓名"/>
+            <input class="weui-input" value="{{user.name}}" bindinput="formInputChange" data-field="name" placeholder="请输入姓名"/>
         </mp-cell>
         <view class="weui-cell weui-cell_select">
           <view class="section__title">性别</view>

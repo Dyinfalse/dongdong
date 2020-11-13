@@ -113,10 +113,12 @@ Page({
                     },
                     success(res) {
                         console.log(res)
-                        wx.showToast({title: '添加成功', icon: 'none'});
+                        wx.showToast({title: '添加成功', icon: 'none', duration: 1000});
+                        setTimeout(() => {
                         wx.switchTab({
-                          url: '/pages/index/index',
+                            url: '/pages/index/index',
                         })
+                        }, 1000)
                     }
                 })
             }
@@ -169,6 +171,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        this.resetUser();
         this.getCombo();
     },
 
