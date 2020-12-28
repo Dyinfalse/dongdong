@@ -38,9 +38,14 @@ Page({
         url: '/app-user/members',
         data: {type: 1},
         success(res) {
-            _this.setData({vipList: res});
+            _this.setData({vipList: res.reverse()});
             wx.stopPullDownRefresh();
         }
+    })
+  },
+  toDetails(e) {
+    wx.navigateTo({
+        url: `/pages/vipDetails/vipDetails?user=${JSON.stringify(e.target.dataset.user)}`,
     })
   },
   /**

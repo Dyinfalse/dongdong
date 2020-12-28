@@ -37,7 +37,7 @@ Page({
         data: {},
         success(res) {
             wx.stopPullDownRefresh();
-            _this.setData({recordList: res});
+            _this.setData({recordList: res.reverse()});
         }
     })
   },

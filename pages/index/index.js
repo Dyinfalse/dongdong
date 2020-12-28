@@ -25,6 +25,7 @@ Page({
         })
     },
     toDetails(e){
+        if(!e.target.dataset.user) return;
         wx.navigateTo({
             url: `/pages/vipDetails/vipDetails?user=${JSON.stringify(e.target.dataset.user)}`,
         })

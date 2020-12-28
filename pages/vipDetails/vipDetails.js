@@ -110,8 +110,8 @@ Page({
                     comboList
                 } = _this.data;
                 console.log(user, comboPicker, comboList)
-                if(!comboPicker) {
-                    return wx.showToast({title: '清选择套餐', icon: 'none'});
+                if(comboPicker != 0 && !comboPicker) {
+                    return wx.showToast({title: '请选择套餐', icon: 'none'});
                 }
                 http({
                     url: '/app-user/update',
