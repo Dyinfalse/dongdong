@@ -1,7 +1,7 @@
 /**index.wxss**/
 
 .container {
-    width: 90%;
+    width: 96%;
     margin: 0 auto;
     height: 100%
 }
@@ -63,18 +63,18 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding-top: 60px;
+    padding-top: 55px;
 }
 
 .desk-list .desk-info {
-    width: 48%;
+    width: 49%;
     background: #A5ADBA;
     border-radius: 4px;
-    margin-bottom: 16px;
+    margin-bottom: 5px;
     font-size: 12px;
     position: relative;
     color: #fff;
-    padding: 8px 12px 15px;
+    padding: 8px 5px 15px;
     line-height: 20px;
 }
 
@@ -119,7 +119,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    max-width: 80%;
+    width: calc(100% - 16px);
     float: left;
 }
 

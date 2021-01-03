@@ -45,7 +45,7 @@ Page({
   },
   toDetails(e) {
     wx.navigateTo({
-        url: `/pages/vipDetails/vipDetails?user=${JSON.stringify(e.target.dataset.user)}`,
+        url: `/pages/vipDetails/vipDetails?user=${JSON.stringify(e.currentTarget.dataset.user)}`,
     })
   },
   /**

@@ -4,7 +4,8 @@ Page({
     data: {
         deskList: [],
         showDeskList: [],
-        filterType: ''
+        filterType: '',
+        timer: null
     },
     onPullDownRefresh() {
         this.getDeskList();
@@ -20,7 +21,8 @@ Page({
                     d.recordTimeSplit = d.recordTime ? d.recordTime.split(' ')[1] : '';
                     return d;
                 })});
-                _this.setData({showDeskList: _this.data.deskList, filterType: ''})
+                _this.setData({showDeskList: _this.data.deskList, filterType: ''});
+                _this.setTime()
             }
         })
     },
@@ -92,6 +94,23 @@ Page({
     toEnd(e) {
         let { deskinfo } = e.target.dataset;
         this.updateDeskStatus(deskinfo, 2);
+    },
+    /**
+     * 启动定时器
+     */
+    setTime() {
+        let { timer, showDeskList } = this.data;
+        clearInterval(timer);
+        this.setData({timer: setInterval(() => {
+            let now = new Date().getTime();
+            showDeskList.map(d => {
+                if(d.id && d.status == 1) {
+                    let start = new Date(d.recordTime).getTime();
+                    console.log((now - start) / 1000/ 60);
+                    d.consumptionTime = parseInt((now - start) / 1000/ 60);
+                }
+            })
+        }, 900)})
     },
     onLoad: function () {
         
