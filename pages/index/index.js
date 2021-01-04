@@ -110,8 +110,8 @@ Page({
             let now = new Date().getTime();
             showDeskList.map(d => {
                 if(d.id && d.status == 1) {
-                    console.log(d.consumptionTime, (now - viewTime) / 1000/ 60);
-                    d.consumptionShowTime = parseInt(d.consumptionTime + (now - viewTime) / 1000/ 60);
+                    console.log(d.consumptionTime, (now - viewTime) / 1000 / 60);
+                    d.consumptionShowTime = parseFloat(d.consumptionTime + (now - viewTime) / 1000 / 60).toFixed(2);
                 }
             })
             this.setData({ showDeskList });
