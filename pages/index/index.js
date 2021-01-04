@@ -5,7 +5,8 @@ Page({
         deskList: [],
         showDeskList: [],
         filterType: '',
-        timer: null
+        timer: null,
+        viewTime: new Date().getTime()
     },
     onPullDownRefresh() {
         this.getDeskList();
@@ -21,7 +22,10 @@ Page({
                     d.recordTimeSplit = d.recordTime ? d.recordTime.split(' ')[1] : '';
                     return d;
                 })});
-                _this.setData({showDeskList: _this.data.deskList, filterType: ''});
+                _this.setData({showDeskList: _this.data.deskList.map(d => {
+                    d.consumptionShowTime = d.consumptionTime;
+                    return d;
+                }), filterType: '', viewTime: new Date().getTime()});
                 _this.setTime()
             }
         })
@@ -99,17 +103,18 @@ Page({
      * 启动定时器
      */
     setTime() {
-        let { timer, showDeskList } = this.data;
+        let { timer, showDeskList, viewTime } = this.data;
+        console.log(timer)
         clearInterval(timer);
         this.setData({timer: setInterval(() => {
             let now = new Date().getTime();
             showDeskList.map(d => {
                 if(d.id && d.status == 1) {
-                    let start = new Date(d.recordTime).getTime();
-                    console.log((now - start) / 1000/ 60);
-                    d.consumptionTime = parseInt((now - start) / 1000/ 60);
+                    console.log(d.consumptionTime, (now - viewTime) / 1000/ 60);
+                    d.consumptionShowTime = parseInt(d.consumptionTime + (now - viewTime) / 1000/ 60);
                 }
             })
+            this.setData({ showDeskList });
         }, 900)})
     },
     onLoad: function () {
