@@ -1,0 +1,9 @@
+<!--pages/vipList/vipList.wxml-->
+<view>
+    <mp-cells>
+        <mp-cell hover="true" wx:for="{{vipList}}" data-user="{{item}}" wx:key="id" bindtap="toDetails">
+            <text>{{item.name}}</text>(<text>{{item.phone}}</text>)-
+            <text>剩余时长{{item.totalTime}}分钟</text>
+        </mp-cell>
+    </mp-cells>
+</view>

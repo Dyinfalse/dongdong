@@ -1,21 +1,21 @@
-// pages/center/center.js
+import { http } from '../../utils/util';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {}
+    vipList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let _this = this;
-    wx.getStorage({key: 'userInfo', success(userInfo) {
-      _this.setData({userInfo: userInfo.data});
-    }})
+
+  },
+  onPullDownRefresh() {
+    this.getVipList();
   },
 
   /**
@@ -29,9 +29,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+      this.getVipList();
   },
 
+  getVipList() {
+    let _this = this;
+    http({
+        url: '/app-user/members',
+        data: {type: 1},
+        success(res) {
+            _this.setData({vipList: res.reverse()});
+            wx.stopPullDownRefresh();
+        }
+    })
+  },
+  toDetails(e) {
+    wx.navigateTo({
+        url: `/pages/vipDetails/vipDetails?user=${JSON.stringify(e.currentTarget.dataset.user)}`,
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -65,31 +81,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-
-  toPayRecord() {
-    wx.navigateTo({
-      url: '../payRecord/payRecord',
-    })
-  },
-
-  toVipList() {
-    wx.navigateTo({
-      url: '../vipList/vipList',
-    })
-  },
-
-  /**
-   * 退出
-   */
-  logout() {
-    wx.clearStorage({
-      success: (res) => {
-        wx.redirectTo({
-          url: '../login/login'
-        })
-      },
-    })
   }
 })

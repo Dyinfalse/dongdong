@@ -1,0 +1,19 @@
+/* pages/addFrom/addFrom.wxss */
+.section__title{
+  margin-left: 30rpx;
+}
+.weui-select{
+  text-align: right;
+}
+.weui-input{
+  text-align: right;
+}
+.weui-btn{
+  background: #196BFF !important;
+  margin:88rpx auto;
+}
+
+.del-weui-btn{
+  background: #BFC2C8 !important;
+  margin:88rpx auto;
+}

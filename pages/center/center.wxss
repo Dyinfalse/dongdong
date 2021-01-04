@@ -1,5 +1,40 @@
 /* pages/center/center.wxss */
 
+.userInfo {
+    height: 200px;
+}
+
+.userInfo .headimage {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: #ccc;
+}
+
+.userInfo .user-name {
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 30px;
+}
+
 .logout {
     margin-top: 30px;
+    position: relative;
+    bottom: 0px;
+    padding: 0px 5%;
+}
+
+.logout button {
+    background: red;
+    color: #fff;
+}
+
+.flex-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 10% 0px;
 }

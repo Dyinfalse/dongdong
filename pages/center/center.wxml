@@ -1,9 +1,16 @@
 <!--pages/center/center.wxml-->
-<view>
+<view class="flex-box">
     <view>
+        <view class="userInfo">
+            <view class="headimage"></view>
+            <view class="user-name">{{userInfo.name}}</view>
+        </view>
         <mp-cells>
-            <mp-cell hover="true" bindtap="toPayRecord">
+            <mp-cell hover="true" wx:if="{{userInfo.type == 2}}" bindtap="toPayRecord">
                 查看消费记录
+            </mp-cell>
+            <mp-cell hover="true" bindtap="toVipList">
+                查看会员列表
             </mp-cell>
         </mp-cells>
     </view>

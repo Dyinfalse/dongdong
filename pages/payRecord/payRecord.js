@@ -1,21 +1,19 @@
-// pages/center/center.js
+// pages/payRecord/payRecord.js
+import { http } from '../../utils/util';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {}
+    recordList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let _this = this;
-    wx.getStorage({key: 'userInfo', success(userInfo) {
-      _this.setData({userInfo: userInfo.data});
-    }})
+
   },
 
   /**
@@ -29,9 +27,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+      this.getRecordList();
   },
 
+  getRecordList() {
+    let _this = this;
+    http({
+        url: '/app-user/statistics',
+        data: {},
+        success(res) {
+            wx.stopPullDownRefresh();
+            _this.setData({recordList: res.reverse()});
+        }
+    })
+  },
+  onPullDownRefresh() {
+    this.getRecordList();
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -65,31 +77,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-
-  toPayRecord() {
-    wx.navigateTo({
-      url: '../payRecord/payRecord',
-    })
-  },
-
-  toVipList() {
-    wx.navigateTo({
-      url: '../vipList/vipList',
-    })
-  },
-
-  /**
-   * 退出
-   */
-  logout() {
-    wx.clearStorage({
-      success: (res) => {
-        wx.redirectTo({
-          url: '../login/login'
-        })
-      },
-    })
   }
 })

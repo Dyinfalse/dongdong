@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    dataList: [],
     error:null,
     formData:{mobile:123},
     rules: [{
@@ -21,41 +22,48 @@ Page({
   },
 
   formInputChange(e) {
-    const {field} = e.currentTarget.dataset
-    this.setData({
-        'formData.mobile': e.detail.value
-    })
-    console.log(this.data)
+    this.data.formData.mobile = e.detail.value;
+    this.getSearchList();
   },
   getSearchList() {
     let _this = this;
+    if(_this.data.formData.mobile == '' || _this.data.formData.mobile == '1') return;
     http({
       url: '/app-user/keyword',
-      data: {keyword:_this.data.formData.mobile},
+      data: { keyword:_this.data.formData.mobile },
         success(res) {
-          wx.showToast({
-            title: '暂无数据',
-            icon: 'none',
-          })
-            _this.setData({deskList: res});
+          if (res.length == 0) {
+              wx.showToast({
+                  title: '暂无数据',
+                  icon: 'none',
+              })
+          } else {
+              _this.setData({
+                  dataList: res.map(u => {
+                      u.active = false;
+                      return u;
+                  })
+              });
+          }
         }
     })
   },
   search(){
-    this.selectComponent('#form').validate((valid, errors) => {
-      console.log('valid', valid, errors)
-      if (!valid) {
-          const firstError = Object.keys(errors)
-          if (firstError.length) {
-              this.setData({
-                  error: errors[firstError[0]].message
-              })
-
-          }
-      } else {
-        this.getSearchList()
-      }
+    if (this.data.formData.mobile.length == 0) {
+        return this.setData({ error: '请输入手机号或用户名'})
+    }
+    this.getSearchList()
+  },
+  activeUser(e) {
+    // console.log(e.target.dataset)
+    wx.navigateTo({
+      url: `/pages/vipDetails/vipDetails?user=${JSON.stringify(e.target.dataset.user)}`,
     })
+    // let { user } = e.target.dataset;
+    // let { dataList } = this.data;
+    // dataList.map(u => u.active = false);
+    // dataList.find(u => u.id == user.id).active = true;
+    // this.setData({ dataList, userId: user.id });
   },
   
   /**
@@ -69,7 +77,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({dataList: [], 'formData.mobile': ''})
   },
 
   /**

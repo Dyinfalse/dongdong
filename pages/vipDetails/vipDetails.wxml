@@ -5,10 +5,10 @@
 <!-- <mp-form-page> -->
     <mp-form id="form" rules="{{rules}}" models="{{user}}">
       <mp-cells>
-        <mp-cell prop="phone" title="手机号">
+        <mp-cell prop="phone" title="手机号" >
             <input class="weui-input" value="{{user.phone}}" maxlength="11" bindinput="formInputChange" data-field="phone" placeholder="请输入手机号"/>
         </mp-cell>
-        <mp-cell prop="name" title="姓名">
+        <mp-cell prop="name" title="姓名" >
             <input class="weui-input" value="{{user.name}}" bindinput="formInputChange" data-field="name" placeholder="请输入姓名"/>
         </mp-cell>
         <view class="weui-cell weui-cell_select">
@@ -37,19 +37,22 @@
                 </picker>
             </view>
         </view>
-        <mp-cell title="套餐时长">
+        <mp-cell title="套餐时长" >
             <input class="weui-input" disabled value="{{comboList[comboPicker].duration}}"/>
         </mp-cell>
-        <mp-cell title="赠送时长">
-            <input class="weui-input" value="{{user.presentTime}}" maxlength="10" bindinput="presentTimeInput" placeholder="0分钟"/>
+        <mp-cell title="赠送时长" >
+            <input class="weui-input" value="{{user.presentTime}}" bindinput="presentTimeInput" placeholder="0分钟"/>
         </mp-cell>
-        <mp-cell title="当前积分">
+        <mp-cell title="剩余时长" >
+            <input class="weui-input" value="{{user.totalTime}}" disabled placeholder="0"/>
+        </mp-cell>
+        <mp-cell title="当前积分" >
             <input class="weui-input" disabled placeholder="0"/>
         </mp-cell>
       </mp-cells>
     </mp-form>
     <!-- <view slot="button"> -->
-        <button style="" class="weui-btn" bindtap="add" type="primary">添加会员</button>
+        <button style="" class="weui-btn" bindtap="save" type="primary">保存</button>
     <!-- </view> -->
 <!-- </mp-form-page> -->
 </view>

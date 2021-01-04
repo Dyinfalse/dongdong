@@ -56,7 +56,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+      let user = JSON.parse(options.user)
+      user.preComboId = user.comboId;
+      user.presentTime = '';
+      this.setData({user})
     },
     bindSexChange: function (e) {
         console.log('picker account 发生选择改变，携带值为', e.detail.value);
@@ -74,6 +77,7 @@ Page({
         })
     },
     bindDateChange(e) {
+        console.log(e)
         this.setData({
             [`user.birthday`]: e.detail.value
         })
@@ -84,9 +88,11 @@ Page({
         })
     },
     presentTimeInput(e) {
-        this.data.user.presentTime = e.detail.value;
+        let { user } = this.data;
+        user.presentTime = e.detail.value;
+        this.setData({ user })
     },
-    add() {
+    save() {
         this.selectComponent('#form').validate((valid, errors) => {
             console.log('valid', valid, errors)
             if (!valid) {
@@ -95,7 +101,6 @@ Page({
                     this.setData({
                         error: errors[firstError[0]].message
                     })
-
                 }
             } else {
                 let _this = this;
@@ -104,8 +109,12 @@ Page({
                     comboPicker,
                     comboList
                 } = _this.data;
+                console.log(user, comboPicker, comboList)
+                if(comboPicker != 0 && !comboPicker) {
+                    return wx.showToast({title: '请选择套餐', icon: 'none'});
+                }
                 http({
-                    url: '/app-user/registry',
+                    url: '/app-user/update',
                     method: 'POST',
                     data: {
                         ...user,
@@ -113,12 +122,7 @@ Page({
                     },
                     success(res) {
                         console.log(res)
-                        wx.showToast({title: '添加成功', icon: 'none', duration: 1000});
-                        setTimeout(() => {
-                        wx.switchTab({
-                            url: '/pages/index/index',
-                        })
-                        }, 1000)
+                        wx.navigateBack()
                     }
                 })
             }
@@ -135,8 +139,12 @@ Page({
             data: {},
             success(res) {
                 console.log(res)
+                let { user } = _this.data;
+                let comboPicker = res.findIndex(c => c.id == user.comboId)
+                console.log(comboPicker)
                 _this.setData({
-                    comboList: res
+                    comboList: res,
+                    comboPicker
                 });
             }
         });
@@ -155,7 +163,7 @@ Page({
                 "type": 0,
                 "birthday": "1996-10-10",
                 "presentTime": "",
-                "preComboId": "0",
+                "preComboId": "",
                 "validityVolume": ""
             }
         })
@@ -171,7 +179,6 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        this.resetUser();
         this.getCombo();
     },
 

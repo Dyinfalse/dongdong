@@ -1,0 +1,7 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "乐高世界",
+  "navigationBarBackgroundColor": "#196BFF",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true
+}
