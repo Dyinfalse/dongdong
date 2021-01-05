@@ -58,7 +58,6 @@ Page({
     onLoad: function (options) {
       let user = JSON.parse(options.user)
       user.preComboId = user.comboId;
-      user.presentTime = '';
       this.setData({user})
     },
     bindSexChange: function (e) {
@@ -113,6 +112,7 @@ Page({
                 if(comboPicker != 0 && !comboPicker) {
                     return wx.showToast({title: '请选择套餐', icon: 'none'});
                 }
+                user.presentTime = '';
                 http({
                     url: '/app-user/update',
                     method: 'POST',
@@ -166,6 +166,15 @@ Page({
                 "preComboId": "",
                 "validityVolume": ""
             }
+        })
+    },
+    /**
+     * 查询单个会员的消费记录
+     */
+    payRecord() {
+        let { user } = this.data;
+        wx.navigateTo({
+          url: '/pages/payRecord/payRecord?userId=' + user.id,
         })
     },
     /**

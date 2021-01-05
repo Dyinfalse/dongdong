@@ -1,9 +1,17 @@
 <!--pages/payRecord/payRecord.wxml-->
 <view>
-    <mp-cells>
+    <mp-cells wx:if="{{!userId}}">
         <mp-cell hover="true" wx:for="{{recordList}}" wx:key="id">
             {{item.name}}-{{item.phone}}购买了:
             <view wx:for="{{item.comboList}}" wx:key="id">{{item.name}}</view>
         </mp-cell>
     </mp-cells>
+
+    <view wx:if="{{userId}}">
+        <mp-cells wx:for="{{userRecordList}}" wx:for-index="key"  wx:for-item="value" title="{{key}} 到店{{value.record.length}}次">
+            <mp-cell hover="true" wx:for="{{value.record}}" wx:key="id">
+                桌号：{{item.deskId}}桌 日期：{{item.createTime}}
+            </mp-cell>
+        </mp-cells>
+    </view>
 </view>

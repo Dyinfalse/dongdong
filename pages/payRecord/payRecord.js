@@ -6,6 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userId: null,
+    userRecordList: [],
     recordList: []
   },
 
@@ -13,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({ userId: options.userId })
   },
 
   /**
@@ -27,9 +29,42 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      this.getRecordList();
+      let { userId } = this.data;
+      if(userId) {
+        this.getRecordListByUserId(userId);
+      } else {
+        this.getRecordList();
+      }
   },
-
+  /**
+   *  获取单个用户的消费记录
+   */
+  getRecordListByUserId(userId) {
+    let _this = this;
+    http({
+        url: '/desk/statistics-by-user',
+        data: { userId },
+        success(res) {
+            wx.stopPullDownRefresh();
+            let userRecordList = {};
+            res.map(r => {
+              let date = r.createTime.split('-')[0] + r.createTime.split('-')[1];
+              if(userRecordList[date]) {
+                userRecordList[date].record.push(r)
+              } else {
+                userRecordList[date] = {
+                  record: []
+                }
+              }
+            })
+            _this.setData({userRecordList})
+            console.log(userRecordList)
+        }
+    })
+  },
+  /**
+   * 获取所有套餐记录
+   */
   getRecordList() {
     let _this = this;
     http({

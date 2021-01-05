@@ -96,6 +96,8 @@ Page({
                     targetDesk['used'] = false;
                     targetDesk['userId'] = null;
                     targetDesk['userInfo'] = null;
+                    targetDesk['consumptionShowTime'] = null;
+                    targetDesk['remainingShowTime'] = null;
                 } else {
                     targetDesk['consumptionTime'] = res.consumptionTime;
                     targetDesk['remainingTime'] = res.totalTime - res.consumptionTime;

@@ -41,9 +41,9 @@
             <input class="weui-input" disabled value="{{comboList[comboPicker].duration}}"/>
         </mp-cell>
         <mp-cell title="赠送时长" >
-            <input class="weui-input" value="{{user.presentTime}}" bindinput="presentTimeInput" placeholder="0分钟"/>
+            <input class="weui-input" disabled value="{{user.presentTime}}" bindinput="presentTimeInput" placeholder="0分钟"/>
         </mp-cell>
-        <mp-cell title="剩余时长" >
+        <mp-cell link hover title="剩余时长">
             <input class="weui-input" value="{{user.totalTime}}" disabled placeholder="0"/>
         </mp-cell>
         <mp-cell title="当前积分" >
@@ -51,8 +51,9 @@
         </mp-cell>
       </mp-cells>
     </mp-form>
-    <!-- <view slot="button"> -->
+    <view class="flexbox">
+        <button style="" class="weui-btn default" bindtap="payRecord" type="default">消费记录</button>
         <button style="" class="weui-btn" bindtap="save" type="primary">保存</button>
-    <!-- </view> -->
+    </view>
 <!-- </mp-form-page> -->
 </view>
