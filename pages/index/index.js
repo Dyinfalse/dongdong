@@ -5,8 +5,7 @@ Page({
         deskList: [],
         showDeskList: [],
         filterType: '',
-        timer: null,
-        viewTime: new Date().getTime()
+        timer: null
     },
     onPullDownRefresh() {
         this.getDeskList();
@@ -24,8 +23,9 @@ Page({
                 })});
                 _this.setData({showDeskList: _this.data.deskList.map(d => {
                     d.consumptionShowTime = d.consumptionTime;
+                    d.startTime = new Date().getTime();
                     return d;
-                }), filterType: '', viewTime: new Date().getTime()});
+                }), filterType: ''});
                 _this.setTime()
             }
         })
@@ -67,7 +67,6 @@ Page({
         if(deskinfo.status == 0){
             return this.updateDeskStatus(deskinfo, 1)
         }
-        console.log(deskinfo)
         wx.navigateTo({
             url: '../start/start?deskId=' + deskinfo.deskId + '&deskName=' + deskinfo.name
         });
@@ -80,7 +79,27 @@ Page({
             method: 'POST',
             data: {id: deskinfo.id, status },
             success(res) {
-                showDeskList.find(d => d.deskId == deskinfo.deskId).status = status;
+                console.log(res)
+                let targetDesk = showDeskList.find(d => d.deskId == deskinfo.deskId);
+                targetDesk.status = status;
+
+                if(status == 2){
+                    targetDesk['appUser'] = null;
+                    targetDesk['consumptionTime'] = null;
+                    targetDesk['id'] = null;
+                    targetDesk['pauseTime'] = null;
+                    targetDesk['pauseTotalTime'] = null;
+                    targetDesk['recordTime'] = null;
+                    targetDesk['remainingTime'] = null;
+                    targetDesk['status'] = null;
+                    targetDesk['used'] = false;
+                    targetDesk['userId'] = null;
+                    targetDesk['userInfo'] = null;
+                } else {
+                    targetDesk['consumptionTime'] = res.consumptionTime;
+                    targetDesk['remainingTime'] = res.totalTime - res.consumptionTime;
+                    targetDesk['startTime'] = new Date().getTime();
+                }
                 _this.setData({ showDeskList });
             }
         })
@@ -103,15 +122,13 @@ Page({
      * 启动定时器
      */
     setTime() {
-        let { timer, showDeskList, viewTime } = this.data;
-        console.log(timer)
+        let { timer, showDeskList } = this.data;
         clearInterval(timer);
         this.setData({timer: setInterval(() => {
-            let now = new Date().getTime();
             showDeskList.map(d => {
                 if(d.id && d.status == 1) {
-                    console.log(d.consumptionTime, (now - viewTime) / 1000 / 60);
-                    d.consumptionShowTime = parseFloat(d.consumptionTime + (now - viewTime) / 1000 / 60).toFixed(2);
+                    let now = new Date().getTime();
+                    d.consumptionShowTime = parseInt(d.consumptionTime + ((now - d.startTime) / 1000 / 60));
                 }
             })
             this.setData({ showDeskList });

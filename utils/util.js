@@ -29,7 +29,8 @@ function http (config) {
     token = token || '';
     wx.showLoading({title: '加载中…'});
     wx.request({
-      url: 'https://www.dongdong.design' + config.url,
+      // url: 'https://www.dongdong.design' + config.url,
+      url: 'http://localhost:8081' + config.url,
       method: config.method || 'GET',
       header: { token },
       data: config.data,
