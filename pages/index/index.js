@@ -23,6 +23,7 @@ Page({
                 })});
                 _this.setData({showDeskList: _this.data.deskList.map(d => {
                     d.consumptionShowTime = d.consumptionTime;
+                    d.remainingShowTime = d.remainingTime;
                     d.startTime = new Date().getTime();
                     return d;
                 }), filterType: ''});
@@ -129,6 +130,7 @@ Page({
                 if(d.id && d.status == 1) {
                     let now = new Date().getTime();
                     d.consumptionShowTime = parseInt(d.consumptionTime + ((now - d.startTime) / 1000 / 60));
+                    d.remainingShowTime = d.appUser.totalTime - d.consumptionShowTime;
                 }
             })
             this.setData({ showDeskList });
