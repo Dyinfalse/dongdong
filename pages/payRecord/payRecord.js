@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userId: null,
+    user: null,
     userRecordList: [],
     recordList: []
   },
@@ -15,7 +15,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({ userId: options.userId })
+    if(options.user){
+      this.setData({ user: JSON.parse(options.user) })
+    }
   },
 
   /**
@@ -29,9 +31,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      let { userId } = this.data;
-      if(userId) {
-        this.getRecordListByUserId(userId);
+      let { user } = this.data;
+      if(user) {
+        this.getRecordListByUserId(user.id);
       } else {
         this.getRecordList();
       }
@@ -46,19 +48,23 @@ Page({
         data: { userId },
         success(res) {
             wx.stopPullDownRefresh();
-            let userRecordList = {};
-            res.map(r => {
+            let userRecordList = [];
+            res.reverse().map(r => {
               let date = r.createTime.split('-')[0] + r.createTime.split('-')[1];
-              if(userRecordList[date]) {
-                userRecordList[date].record.push(r)
+              let target = userRecordList.find(o => o.date == date);
+              if(target) {
+                target.record.push(r)
               } else {
-                userRecordList[date] = {
+                userRecordList.push({
+                  date,
                   record: []
-                }
+                })
               }
             })
             _this.setData({userRecordList})
-            console.log(userRecordList)
+            wx.setNavigationBarTitle({
+              title: _this.data.user.name + '的消费记录'
+            })
         }
     })
   },
@@ -73,11 +79,19 @@ Page({
         success(res) {
             wx.stopPullDownRefresh();
             _this.setData({recordList: res.reverse()});
+            wx.setNavigationBarTitle({
+              title: '消费记录'
+            })
         }
     })
   },
   onPullDownRefresh() {
-    this.getRecordList();
+    let { user } = this.data;
+    if(user) {
+      this.getRecordListByUserId(user.id);
+    } else {
+      this.getRecordList();
+    }
   },
   /**
    * 生命周期函数--监听页面隐藏

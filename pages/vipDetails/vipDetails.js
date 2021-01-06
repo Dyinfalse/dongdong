@@ -56,6 +56,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        console.log(options)
       let user = JSON.parse(options.user)
       user.preComboId = user.comboId;
       this.setData({user})
@@ -141,7 +142,6 @@ Page({
                 console.log(res)
                 let { user } = _this.data;
                 let comboPicker = res.findIndex(c => c.id == user.comboId)
-                console.log(comboPicker)
                 _this.setData({
                     comboList: res,
                     comboPicker
@@ -174,7 +174,16 @@ Page({
     payRecord() {
         let { user } = this.data;
         wx.navigateTo({
-          url: '/pages/payRecord/payRecord?userId=' + user.id,
+          url: `/pages/payRecord/payRecord?user=${JSON.stringify(user)}`,
+        })
+    },
+    /**
+     * 去修改剩余时长
+     */
+    toChangeTotal() {
+        let { user } = this.data;
+        wx.navigateTo({
+          url: `/pages/changeTotal/changeTotal?user=${JSON.stringify(user)}`,
         })
     },
     /**
@@ -188,6 +197,14 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        let pages = getCurrentPages();
+        let currPage = pages[pages.length - 1];
+        let totalTime = currPage.data.totalTime;
+        let { user } = this.data;
+        if(totalTime){
+            user.totalTime = totalTime;
+            this.setData({ user });
+        }
         this.getCombo();
     },
 

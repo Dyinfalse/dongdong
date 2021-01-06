@@ -44,7 +44,7 @@
             <input class="weui-input" disabled value="{{user.presentTime}}" bindinput="presentTimeInput" placeholder="0分钟"/>
         </mp-cell>
         <mp-cell link hover title="剩余时长">
-            <input class="weui-input" value="{{user.totalTime}}" disabled placeholder="0"/>
+            <input class="weui-input" bindtap="toChangeTotal" value="{{user.totalTime}}" disabled placeholder="0"/>
         </mp-cell>
         <mp-cell title="当前积分" >
             <input class="weui-input" disabled placeholder="0"/>
