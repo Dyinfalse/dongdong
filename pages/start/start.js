@@ -43,6 +43,7 @@ Page({
     },
     getSearchList() {
         let _this = this;
+        if(_this.data.formData.mobile == '' || _this.data.formData.mobile == '1') return;
         http({
             url: '/app-user/keyword',
             data: {

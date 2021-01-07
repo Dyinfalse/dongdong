@@ -41,6 +41,7 @@ Page({
      * 筛选
      */
     filterList(e){
+        return;
         let { type } = e.target.dataset;
         let { deskList, filterType, showDeskList } = this.data;
         filterType = filterType == type ? '' : type;
@@ -85,6 +86,11 @@ Page({
                 targetDesk.status = status;
 
                 if(status == 2){
+                    showDeskList.map(d => {
+                        if(d.userId == targetDesk.userId) {
+                            d.appUser.totalTime -= res.consumptionTime;
+                        }
+                    })
                     targetDesk['appUser'] = null;
                     targetDesk['consumptionTime'] = null;
                     targetDesk['id'] = null;
@@ -98,6 +104,7 @@ Page({
                     targetDesk['userInfo'] = null;
                     targetDesk['consumptionShowTime'] = null;
                     targetDesk['remainingShowTime'] = null;
+                    targetDesk['recordTimeSplit'] = null;
                 } else {
                     targetDesk['consumptionTime'] = res.consumptionTime;
                     targetDesk['remainingTime'] = res.totalTime - res.consumptionTime;
@@ -129,10 +136,18 @@ Page({
         clearInterval(timer);
         this.setData({timer: setInterval(() => {
             showDeskList.map(d => {
-                if(d.id && d.status == 1) {
+                if(d.id) {
                     let now = new Date().getTime();
-                    d.consumptionShowTime = parseInt(d.consumptionTime + ((now - d.startTime) / 1000 / 60));
-                    d.remainingShowTime = d.appUser.totalTime - d.consumptionShowTime;
+                    if(d.status == 1){
+                        d.consumptionShowTime = parseInt(d.consumptionTime + ((now - d.startTime) / 1000 / 60));
+                    }
+                    let allConsumptionShowTime = 0;
+                    showDeskList.map(sd => {
+                        if(sd.userId == d.userId){
+                            allConsumptionShowTime += sd.consumptionShowTime
+                        }
+                    });
+                    d.remainingShowTime = d.appUser.totalTime - allConsumptionShowTime;
                 }
             })
             this.setData({ showDeskList });

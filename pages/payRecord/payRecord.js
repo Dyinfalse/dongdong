@@ -57,7 +57,7 @@ Page({
               } else {
                 userRecordList.push({
                   date,
-                  record: []
+                  record: [r]
                 })
               }
             })

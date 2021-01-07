@@ -2,7 +2,7 @@
 <view>
     <mp-cells wx:if="{{!user}}">
         <mp-cell hover="true" wx:for="{{recordList}}" wx:key="id">
-            {{item.name}}-{{item.phone}}购买了:
+            <text style="color: #3c61ea">{{item.name}}</text>-{{item.phone}}购买了:
             <view wx:for="{{item.comboList}}" wx:key="id">{{item.name}}-{{item.createTime}}</view>
         </mp-cell>
     </mp-cells>

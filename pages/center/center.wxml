@@ -7,10 +7,17 @@
         </view>
         <mp-cells>
             <mp-cell hover="true" wx:if="{{userInfo.type == 2}}" bindtap="toPayRecord">
-                查看消费记录
+                查看充卡记录
             </mp-cell>
             <mp-cell hover="true" bindtap="toVipList">
                 查看会员列表
+            </mp-cell>
+            <mp-cell wx:if="{{userInfo.type == 2}}">
+                <view class="flex-box clear-padding">
+                    <text>短信功能</text>
+                    <switch wx:if="{{!loading}}" checked="{{message}}" bindchange="changeSwitch"/>
+                    <mp-loading wx:if="{{loading}}" type="circle" tips=""></mp-loading>
+                </view>
             </mp-cell>
         </mp-cells>
     </view>

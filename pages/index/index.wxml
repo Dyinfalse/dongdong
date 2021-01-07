@@ -13,7 +13,7 @@
                 <text class="vip-icon" wx:if="{{item.userInfo}}"></text>
                 <text class="userinfo">{{item.userInfo || '空闲'}}{{item.appUser ? ('_' + item.appUser.phone) : ''}}</text>
             </view>
-            <view data-user="{{item.appUser}}" bindtap="toDetails">开始时间：{{item.recordTimeSplit}}</view>
+            <view data-user="{{item.appUser}}" bindtap="toDetails">开始时间：{{item.recordTimeSplit || ''}}</view>
             <view data-user="{{item.appUser}}" bindtap="toDetails">消费时长：{{item.consumptionShowTime || '0'}}分钟</view>
             <view data-user="{{item.appUser}}" bindtap="toDetails">剩余时长：{{item.remainingShowTime || '0'}}分钟</view>
             <view class="btn-box">
