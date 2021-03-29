@@ -7,15 +7,15 @@
         <text class="free {{filterType == 'free' ? 'active' : ''}}" data-type="free" bindtap="filterList">未使用</text>
     </view>
     <view class='desk-list'>
-        <view class="desk-info {{item.status == 1 && item.remainingTime > 400 ? 'ing' : item.status == 0 ? 'pause' : (item.status == 1 && item.remainingTime < 400) ? 'lt400' : 'free'}}" wx:for="{{showDeskList}}" wx:key="deskId">
+        <view class="desk-info {{item.status == 1 && item.remainingShowTime > 400 ? 'ing' : item.status == 0 ? 'pause' : (item.status == 1 && item.remainingShowTime < 400) ? 'lt400' : 'free'}}" wx:for="{{showDeskList}}" wx:key="deskId">
             <view class="desk-num">{{item.name}}</view>
             <view class="vip-name">
                 <text class="vip-icon" wx:if="{{item.userInfo}}"></text>
                 <text class="userinfo">{{item.userInfo || '空闲'}}{{item.appUser ? ('_' + item.appUser.phone) : ''}}</text>
             </view>
-            <view data-user="{{item.appUser}}" bindtap="toDetails">开始时间：{{item.recordTimeSplit}}</view>
+            <view data-user="{{item.appUser}}" bindtap="toDetails">开始时间：{{item.recordTimeSplit || ''}}</view>
             <view data-user="{{item.appUser}}" bindtap="toDetails">消费时长：{{item.consumptionShowTime || '0'}}分钟</view>
-            <view data-user="{{item.appUser}}" bindtap="toDetails">剩余时长：{{item.remainingTime || '0'}}分钟</view>
+            <view data-user="{{item.appUser}}" bindtap="toDetails">剩余时长：{{item.remainingShowTime || '0'}}分钟</view>
             <view class="btn-box">
                 <button class="ing" bindtap="toStart" data-deskinfo="{{item}}">开始</button>
                 <button class="pause" bindtap="toPause" data-deskinfo="{{item}}">暂停</button>

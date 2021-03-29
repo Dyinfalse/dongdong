@@ -8,7 +8,9 @@
     "pages/login/login",
     "pages/start/start",
     "pages/search/search",
-    "pages/vipList/vipList"
+    "pages/vipList/vipList",
+    "pages/changeTotal/changeTotal",
+    "pages/sendUserMsg/sendUserMsg"
   ],
   "window": {
     "backgroundTextStyle": "light",

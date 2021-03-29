@@ -38,7 +38,22 @@ Page({
         url: '/app-user/members',
         data: {type: 1},
         success(res) {
-            _this.setData({vipList: res.reverse()});
+            let userRecordList = [];
+            res.reverse().map(r => {
+              let date = r.createTime.split('-')[0] + r.createTime.split('-')[1];
+              let target = userRecordList.find(o => o.date == date);
+              console.log(target)
+              if(target) {
+                target.record.push(r)
+              } else {
+                userRecordList.push({
+                  date,
+                  record: [r]
+                })
+              }
+            })
+            console.log(userRecordList, res.length)
+            _this.setData({vipList: userRecordList});
             wx.stopPullDownRefresh();
         }
     })

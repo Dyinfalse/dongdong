@@ -1,0 +1,19 @@
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+<view class="search-content">
+  <view class="content">
+    <text class="title">请输入剩余时长</text>
+    <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+      <mp-cells>
+        <mp-cell title="">
+            <view class="flex-box">
+                <input value="{{user.totalTime}}" bindinput="formInputChange" placeholder="请输入剩余时长"/>
+                <text>分钟</text>
+            </view>
+        </mp-cell>
+      </mp-cells>
+    </mp-form>
+  </view>
+  <!-- <view class="btn">查询</view> -->
+  <button class="weui-btn" bindtap="save" type="primary">保存</button>
+  <!-- 会员查询1 -->
+</view>

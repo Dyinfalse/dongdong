@@ -5,8 +5,7 @@ Page({
         deskList: [],
         showDeskList: [],
         filterType: '',
-        timer: null,
-        viewTime: new Date().getTime()
+        timer: null
     },
     onPullDownRefresh() {
         this.getDeskList();
@@ -24,8 +23,10 @@ Page({
                 })});
                 _this.setData({showDeskList: _this.data.deskList.map(d => {
                     d.consumptionShowTime = d.consumptionTime;
+                    d.remainingShowTime = d.remainingTime;
+                    d.startTime = new Date().getTime();
                     return d;
-                }), filterType: '', viewTime: new Date().getTime()});
+                }), filterType: ''});
                 _this.setTime()
             }
         })
@@ -40,6 +41,7 @@ Page({
      * 筛选
      */
     filterList(e){
+        return;
         let { type } = e.target.dataset;
         let { deskList, filterType, showDeskList } = this.data;
         filterType = filterType == type ? '' : type;
@@ -67,7 +69,6 @@ Page({
         if(deskinfo.status == 0){
             return this.updateDeskStatus(deskinfo, 1)
         }
-        console.log(deskinfo)
         wx.navigateTo({
             url: '../start/start?deskId=' + deskinfo.deskId + '&deskName=' + deskinfo.name
         });
@@ -80,7 +81,35 @@ Page({
             method: 'POST',
             data: {id: deskinfo.id, status },
             success(res) {
-                showDeskList.find(d => d.deskId == deskinfo.deskId).status = status;
+                console.log(res)
+                let targetDesk = showDeskList.find(d => d.deskId == deskinfo.deskId);
+                targetDesk.status = status;
+
+                if(status == 2){
+                    showDeskList.map(d => {
+                        if(d.userId == targetDesk.userId) {
+                            d.appUser.totalTime -= res.consumptionTime;
+                        }
+                    })
+                    targetDesk['appUser'] = null;
+                    targetDesk['consumptionTime'] = null;
+                    targetDesk['id'] = null;
+                    targetDesk['pauseTime'] = null;
+                    targetDesk['pauseTotalTime'] = null;
+                    targetDesk['recordTime'] = null;
+                    targetDesk['remainingTime'] = null;
+                    targetDesk['status'] = null;
+                    targetDesk['used'] = false;
+                    targetDesk['userId'] = null;
+                    targetDesk['userInfo'] = null;
+                    targetDesk['consumptionShowTime'] = null;
+                    targetDesk['remainingShowTime'] = null;
+                    targetDesk['recordTimeSplit'] = null;
+                } else {
+                    targetDesk['consumptionTime'] = res.consumptionTime;
+                    targetDesk['remainingTime'] = res.totalTime - res.consumptionTime;
+                    targetDesk['startTime'] = new Date().getTime();
+                }
                 _this.setData({ showDeskList });
             }
         })
@@ -103,15 +132,22 @@ Page({
      * 启动定时器
      */
     setTime() {
-        let { timer, showDeskList, viewTime } = this.data;
-        console.log(timer)
+        let { timer, showDeskList } = this.data;
         clearInterval(timer);
         this.setData({timer: setInterval(() => {
-            let now = new Date().getTime();
             showDeskList.map(d => {
-                if(d.id && d.status == 1) {
-                    console.log(d.consumptionTime, (now - viewTime) / 1000 / 60);
-                    d.consumptionShowTime = parseFloat(d.consumptionTime + (now - viewTime) / 1000 / 60).toFixed(2);
+                if(d.id) {
+                    let now = new Date().getTime();
+                    if(d.status == 1){
+                        d.consumptionShowTime = parseInt(d.consumptionTime + ((now - d.startTime) / 1000 / 60));
+                    }
+                    let allConsumptionShowTime = 0;
+                    showDeskList.map(sd => {
+                        if(sd.userId == d.userId){
+                            allConsumptionShowTime += sd.consumptionShowTime
+                        }
+                    });
+                    d.remainingShowTime = d.appUser.totalTime - allConsumptionShowTime;
                 }
             })
             this.setData({ showDeskList });

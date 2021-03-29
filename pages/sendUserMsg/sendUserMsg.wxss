@@ -8,20 +8,12 @@
 .weui-input{
   text-align: right;
 }
-.weui-btn {
+.weui-btn{
   background: #196BFF !important;
-  margin: 0rpx 10rpx !important;
-}
-
-.weui-btn.default {
-  background: #f8f8f8 !important;
+  margin:88rpx auto;
 }
 
 .del-weui-btn{
   background: #BFC2C8 !important;
   margin:88rpx auto;
-}
-
-.flexbox {
-  display: flex;
 }

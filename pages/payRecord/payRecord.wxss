@@ -1,0 +1,6 @@
+/* pages/payRecord/payRecord.wxss */
+
+.flex-box {
+  display: flex;
+  justify-content: space-between;
+}

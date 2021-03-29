@@ -6,6 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    user: null,
+    userRecordList: [],
     recordList: []
   },
 
@@ -13,7 +15,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if(options.user){
+      this.setData({ user: JSON.parse(options.user) })
+    }
   },
 
   /**
@@ -27,9 +31,46 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      this.getRecordList();
+      let { user } = this.data;
+      if(user) {
+        this.getRecordListByUserId(user.id);
+      } else {
+        this.getRecordList();
+      }
   },
-
+  /**
+   *  获取单个用户的消费记录
+   */
+  getRecordListByUserId(userId) {
+    let _this = this;
+    http({
+        url: '/desk/statistics-by-user',
+        data: { userId },
+        success(res) {
+            wx.stopPullDownRefresh();
+            let userRecordList = [];
+            res.reverse().map(r => {
+              let date = r.createTime.split('-')[0] + r.createTime.split('-')[1];
+              let target = userRecordList.find(o => o.date == date);
+              if(target) {
+                target.record.push(r)
+              } else {
+                userRecordList.push({
+                  date,
+                  record: [r]
+                })
+              }
+            })
+            _this.setData({userRecordList})
+            wx.setNavigationBarTitle({
+              title: _this.data.user.name + '的消费记录'
+            })
+        }
+    })
+  },
+  /**
+   * 获取所有套餐记录
+   */
   getRecordList() {
     let _this = this;
     http({
@@ -38,11 +79,19 @@ Page({
         success(res) {
             wx.stopPullDownRefresh();
             _this.setData({recordList: res.reverse()});
+            wx.setNavigationBarTitle({
+              title: '消费记录'
+            })
         }
     })
   },
   onPullDownRefresh() {
-    this.getRecordList();
+    let { user } = this.data;
+    if(user) {
+      this.getRecordListByUserId(user.id);
+    } else {
+      this.getRecordList();
+    }
   },
   /**
    * 生命周期函数--监听页面隐藏

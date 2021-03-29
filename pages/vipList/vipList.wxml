@@ -1,9 +1,12 @@
 <!--pages/vipList/vipList.wxml-->
 <view>
-    <mp-cells>
-        <mp-cell hover="true" wx:for="{{vipList}}" data-user="{{item}}" wx:key="id" bindtap="toDetails">
-            <text>{{item.name}}</text>(<text>{{item.phone}}</text>)-
-            <text>剩余时长{{item.totalTime}}分钟</text>
+    <mp-cells wx:for="{{vipList}}" wx:key="date" title="{{item.date}} {{item.record.length}}人">
+        <mp-cell hover="true" wx:for="{{item.record}}" wx:key="id">
+            <view class="flex-box">
+                <text style="color: #3c61ea">{{item.name}}</text>(<text>{{item.phone}}</text>)-
+                <text>剩余时长{{item.totalTime}}分钟</text>
+                <view>创建时间：{{item.createTime}}</view>
+            </view>
         </mp-cell>
     </mp-cells>
 </view>
