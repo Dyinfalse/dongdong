@@ -99,8 +99,17 @@ Page({
   onShareAppMessage: function () {
 
   },
-
-
+  /**
+   * 发送短信页面
+   */
+  sendUserMsg() {
+    wx.navigateTo({
+      url: '../sendUserMsg/sendUserMsg',
+    })
+  },
+  /**
+   * 消费记录
+   */
   toPayRecord() {
     wx.navigateTo({
       url: '../payRecord/payRecord',

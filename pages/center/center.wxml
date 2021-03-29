@@ -14,7 +14,7 @@
             </mp-cell>
             <mp-cell wx:if="{{userInfo.type == 2}}">
                 <view class="flex-box clear-padding">
-                    <text>短信功能</text>
+                    <text bindtap="sendUserMsg">短信功能</text>
                     <switch wx:if="{{!loading}}" checked="{{message}}" bindchange="changeSwitch"/>
                     <mp-loading wx:if="{{loading}}" type="circle" tips=""></mp-loading>
                 </view>

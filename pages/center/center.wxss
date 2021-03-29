@@ -50,3 +50,9 @@
     margin: 0;
     height: unset;
 }
+
+.flex-box.clear-padding text {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+}
