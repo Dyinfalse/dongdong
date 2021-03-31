@@ -10,24 +10,28 @@ Page({
   data: {
       comboPicker: 0,
       error: "",
-      typeList: [{
-              name: "男",
-              id: "0"
-          },
-          {
-              name: "女",
-              id: "1"
-          }
+      typeList: [
+        {
+            name: "消费结束短信",
+            id: 0
+        },
+        {
+            name: "会员开通短信",
+            id: 1
+        }
       ],
       comboList: [],
-      rules: [{
-          name: 'name',
-          rules: [{
-              required: true,
-              message: '请输入姓名'
-          }],
+      rules: [
+        {
+        name: 'name',
+        rules: [
+            {
+                required: true,
+                message: '请输入姓名'
+            }
+        ],
       }, {
-          name: 'phone',
+          name: 'mobile',
           rules: [{
               required: true,
               message: '请输入手机号'
@@ -36,19 +40,14 @@ Page({
               message: '手机号格式错误'
           }],
       }],
-      user: {
-          "phone": '',
-          "comboId": 0,
-          "coupon": 0,
-          "currentIntegral": 0,
-          "member": true,
+      msg: {
+          "mobile": '',
           "name": "",
-          "sex": 0,
+          "usedTime": "",
+          "surplusTime": "",
           "type": 0,
-          "birthday": "1996-10-10",
-          "presentTime": "",
-          "preComboId": "0",
-          "validityVolume": ""
+          "vipName": "",
+          "vipTime": "",
       }
   },
 
@@ -62,7 +61,7 @@ Page({
       console.log('picker account 发生选择改变，携带值为', e.detail.value);
 
       this.setData({
-          'user.sex': e.detail.value
+          'msg.type': e.detail.value
       })
   },
   formInputChange(e) {
@@ -70,12 +69,7 @@ Page({
           field
       } = e.currentTarget.dataset
       this.setData({
-          [`user.${field}`]: e.detail.value
-      })
-  },
-  bindDateChange(e) {
-      this.setData({
-          [`user.birthday`]: e.detail.value
+          [`msg.${field}`]: e.detail.value
       })
   },
   bindcomboIdChange(e) {
@@ -86,7 +80,7 @@ Page({
   presentTimeInput(e) {
       this.data.user.presentTime = e.detail.value;
   },
-  add() {
+  send() {
       this.selectComponent('#form').validate((valid, errors) => {
           console.log('valid', valid, errors)
           if (!valid) {
@@ -95,29 +89,35 @@ Page({
                   this.setData({
                       error: errors[firstError[0]].message
                   })
-
               }
           } else {
-              let _this = this;
-              let {
-                  user,
-                  comboPicker,
-                  comboList
-              } = _this.data;
+              let { msg } = this.data;
+              let param = {};
+              param['mobile'] = msg.mobile;
+              param['type'] = msg.type;
+              if (param['type'] == 1) {
+                param['params'] = [
+                    msg.name,
+                    msg.vipName.replace("会员", ""),
+                    msg.vipTime
+                ]
+              } else {
+                param['params'] = [
+                    msg.name,
+                    msg.usedTime,
+                    msg.surplusTime
+                ]
+              }
               http({
-                  url: '/app-user/registry',
+                  url: '/app-user/sendUserMsg',
                   method: 'POST',
-                  data: {
-                      ...user,
-                      comboId: comboList[comboPicker].id
-                  },
+                  data: param,
                   success(res) {
-                      console.log(res)
-                      wx.showToast({title: '添加成功', icon: 'none', duration: 1000});
+                      wx.showToast({title: '发送成功', icon: 'none', duration: 1000});
                       setTimeout(() => {
-                      wx.switchTab({
-                          url: '/pages/index/index',
-                      })
+                        wx.switchTab({
+                            url: '/pages/center/center',
+                        })
                       }, 1000)
                   }
               })
@@ -144,20 +144,15 @@ Page({
 
   resetUser() {
       this.setData({
-          user: {
-              "phone": '',
-              "comboId": 0,
-              "coupon": 0,
-              "currentIntegral": 0,
-              "member": true,
-              "name": "",
-              "sex": 0,
-              "type": 0,
-              "birthday": "1996-10-10",
-              "presentTime": "",
-              "preComboId": "0",
-              "validityVolume": ""
-          }
+        msg: {
+            "mobile": '',
+            "name": "",
+            "usedTime": "",
+            "surplusTime": "",
+            "type": 0,
+            "vipName": "",
+            "vipTime": "",
+        }
       })
   },
   /**

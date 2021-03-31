@@ -13,17 +13,23 @@
             </view>
         </view>
         <mp-cells>
-            <mp-cell prop="phone" title="手机号">
-                <input class="weui-input" value="{{msg.phone}}" maxlength="11" bindinput="formInputChange" data-field="phone" placeholder="请输入手机号"/>
+            <mp-cell prop="mobile" title="手机号">
+                <input class="weui-input" value="{{msg.mobile}}" maxlength="11" bindinput="formInputChange" data-field="mobile" placeholder="请输入手机号"/>
             </mp-cell>
             <mp-cell prop="name" title="姓名">
                 <input class="weui-input" value="{{msg.name}}" bindinput="formInputChange" data-field="name" placeholder="请输入姓名"/>
             </mp-cell>
-            <mp-cell prop="name" title="消费时长">
+            <mp-cell wx:if="{{msg.type == 0}}" prop="usedTime" title="消费时长">
                 <input class="weui-input" value="{{msg.usedTime}}" bindinput="formInputChange" data-field="usedTime" placeholder="请输入消费时长"/>
             </mp-cell>
-            <mp-cell prop="name" title="剩余时长">
+            <mp-cell wx:if="{{msg.type == 0}}" prop="surplusTime" title="剩余时长">
                 <input class="weui-input" value="{{msg.surplusTime}}" bindinput="formInputChange" data-field="surplusTime" placeholder="请输入剩余时长"/>
+            </mp-cell>
+            <mp-cell wx:if="{{msg.type != 0}}" prop="vipName" title="会员名称">
+                <input class="weui-input" value="{{msg.vipName}}" bindinput="formInputChange" data-field="vipName" placeholder="请输入会员名称"/>
+            </mp-cell>
+            <mp-cell wx:if="{{msg.type != 0}}" prop="vipTime" title="会员时长">
+                <input class="weui-input" value="{{msg.vipTime}}" bindinput="formInputChange" data-field="vipTime" placeholder="请输入会员时长"/>
             </mp-cell>
         </mp-cells>
     </mp-form>
