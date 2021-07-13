@@ -8,7 +8,8 @@ Page({
   data: {
     user: null,
     userRecordList: [],
-    recordList: []
+    recordList: [],
+    page: 1
   },
 
   /**
@@ -71,14 +72,18 @@ Page({
   /**
    * 获取所有套餐记录
    */
-  getRecordList() {
-    let _this = this;
+  getRecordList(page) {
+    var page = page || this.data.page;
     http({
         url: '/app-user/statistics',
-        data: {},
-        success(res) {
+        data: { page },
+        success: (res) => {
             wx.stopPullDownRefresh();
-            _this.setData({recordList: res.reverse()});
+            if (page > 1) {
+              var { recordList } = this.data;
+              res = recordList.concat(res);
+            }
+            this.setData({recordList: res});
             wx.setNavigationBarTitle({
               title: '消费记录'
             })
@@ -118,7 +123,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    console.log("11")
+    let { page, user } = this.data;
+    if (!user) {
+      page ++;
+      this.getRecordList(page);
+      this.setData({ page });
+    }
   },
 
   /**
